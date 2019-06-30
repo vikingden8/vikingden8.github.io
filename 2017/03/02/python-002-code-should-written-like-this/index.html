@@ -1,0 +1,734 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Viking Den Personal Website" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Python 这门语言最大的优点之一就是语法简洁，好的代码就像伪代码一样，干净、整洁、一目了然。但有时候我们写代码，特别是 Python 初学者，往往还是按照其它语言的思维习惯来写，那样的写法不仅运行速度慢，代码读起来也费尽，给人一种拖泥带水的感觉，过段时间连自己也读不懂。
+《计算机程序的构造和解释》的作者哈尔·阿伯尔森曾这样说：“Programs must be written for peop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码这样写更优雅 (Python 版)">
+<meta property="og:url" content="http://vikingden.cn/2017/03/02/python-002-code-should-written-like-this/index.html">
+<meta property="og:site_name" content="Viking's Website">
+<meta property="og:description" content="Python 这门语言最大的优点之一就是语法简洁，好的代码就像伪代码一样，干净、整洁、一目了然。但有时候我们写代码，特别是 Python 初学者，往往还是按照其它语言的思维习惯来写，那样的写法不仅运行速度慢，代码读起来也费尽，给人一种拖泥带水的感觉，过段时间连自己也读不懂。
+《计算机程序的构造和解释》的作者哈尔·阿伯尔森曾这样说：“Programs must be written for peop">
+<meta property="og:updated_time" content="2019-06-30T14:05:41.327Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="代码这样写更优雅 (Python 版)">
+<meta name="twitter:description" content="Python 这门语言最大的优点之一就是语法简洁，好的代码就像伪代码一样，干净、整洁、一目了然。但有时候我们写代码，特别是 Python 初学者，往往还是按照其它语言的思维习惯来写，那样的写法不仅运行速度慢，代码读起来也费尽，给人一种拖泥带水的感觉，过段时间连自己也读不懂。
+《计算机程序的构造和解释》的作者哈尔·阿伯尔森曾这样说：“Programs must be written for peop">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"remove"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vikingden.cn/2017/03/02/python-002-code-should-written-like-this/"/>
+
+
+
+
+
+  <title> 代码这样写更优雅 (Python 版) | Viking's Website </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Viking's Website</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Notes, thoughts, stories.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://vikingden.cn/2017/03/02/python-002-code-should-written-like-this/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Viking Den">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/16629000?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Viking's Website">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Viking's Website" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                代码这样写更优雅 (Python 版)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-02T09:22:11+08:00">
+                2017-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/02/python-002-code-should-written-like-this/" class="leancloud_visitors" data-flag-title="代码这样写更优雅 (Python 版)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Python 这门语言最大的优点之一就是语法简洁，好的代码就像伪代码一样，干净、整洁、一目了然。但有时候我们写代码，特别是 Python 初学者，往往还是按照其它语言的思维习惯来写，那样的写法不仅运行速度慢，代码读起来也费尽，给人一种拖泥带水的感觉，过段时间连自己也读不懂。</p>
+<p>《计算机程序的构造和解释》的作者哈尔·阿伯尔森曾这样说：“Programs must be written for people to read, and only incidentally for machines to execute.”</p>
+<p>要写出 Pythonic（优雅的、地道的、整洁的）代码，还要平时多观察那些大牛代码，Github 上有很多非常优秀的源代码值得阅读，比如：requests、flask、tornado，笔者列举一些常见的 Pythonic 写法，希望能给你带来一点启迪。</p>
+<h3 id="1、变量交换"><a href="#1、变量交换" class="headerlink" title="1、变量交换"></a>1、变量交换</h3><p>大部分编程语言中交换两个变量的值时，不得不引入一个临时变量：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="number">2</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>tmp = a</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = b</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b = tmp</div></pre></td></tr></table></figure>
+<p><strong>pythonic</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a, b = b, a</div></pre></td></tr></table></figure>
+<h3 id="2、循环遍历区间元素"><a href="#2、循环遍历区间元素" class="headerlink" title="2、循环遍历区间元素"></a>2、循环遍历区间元素</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]:</div><div class="line">    <span class="keyword">print</span> i2</div><div class="line"><span class="comment"># 或者</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">6</span>):</div><div class="line">    <span class="keyword">print</span> i2</div></pre></td></tr></table></figure>
+<p><strong>pythonic</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">6</span>):</div><div class="line">    <span class="keyword">print</span> i2</div></pre></td></tr></table></figure>
+<p>xrange 返回的是生成器对象，生成器比列表更加节省内存，不过需要注意的是 xrange 是 python2 中的写法，python3 只有 range 方法，特点和 xrange 是一样的。</p>
+<h3 id="3、带有索引位置的集合遍历"><a href="#3、带有索引位置的集合遍历" class="headerlink" title="3、带有索引位置的集合遍历"></a>3、带有索引位置的集合遍历</h3><p>遍历集合时如果需要使用到集合的索引位置时，直接对集合迭代是没有索引信息的，普通的方式使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">colors = [<span class="string">'red'</span>, <span class="string">'green'</span>, <span class="string">'blue'</span>, <span class="string">'yellow'</span>]</div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(colors)):</div><div class="line">    <span class="keyword">print</span> i, <span class="string">'---&gt;'</span>, colors[i]</div></pre></td></tr></table></figure>
+<p><strong>pythonic</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i, color <span class="keyword">in</span> enumerate(colors):</div><div class="line">    <span class="keyword">print</span> i, <span class="string">'---&gt;'</span>, color</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="4、字符串连接"><a href="#4、字符串连接" class="headerlink" title="4、字符串连接"></a>4、字符串连接</h3><p>字符串连接时，普通的方式可以用 + 操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">names = [<span class="string">'raymond'</span>, <span class="string">'rachel'</span>, <span class="string">'matthew'</span>, <span class="string">'roger'</span>,</div><div class="line">         <span class="string">'betty'</span>, <span class="string">'melissa'</span>, <span class="string">'judith'</span>, <span class="string">'charlie'</span>]</div><div class="line"></div><div class="line">s = names[<span class="number">0</span>]</div><div class="line"><span class="keyword">for</span> name <span class="keyword">in</span> names[<span class="number">1</span>:]:</div><div class="line">    s += <span class="string">', '</span> + name</div><div class="line"><span class="keyword">print</span> s</div></pre></td></tr></table></figure>
+<p><strong>pythonic</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> <span class="string">', '</span>.join(names)</div></pre></td></tr></table></figure>
+<p>join 是一种更加高效的字符串连接方式，使用 + 操作时，每执行一次+操作就会导致在内存中生成一个新的字符串对象，遍历8次有8个字符串生成，造成无谓的内存浪费。而用 join 方法整个过程只会产生一个字符串对象。</p>
+<h3 id="5、打开-关闭文件"><a href="#5、打开-关闭文件" class="headerlink" title="5、打开/关闭文件"></a>5、打开/关闭文件</h3><p>执行文件操作时，最后一定不能忘记的操作是关闭文件，即使报错了也要 close。普通的方式是在 finnally 块中显示的调用 close 方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">f = open(<span class="string">'data.txt'</span>)</div><div class="line"><span class="keyword">try</span>:</div><div class="line">    data = f.read()</div><div class="line"><span class="keyword">finally</span>:</div><div class="line">    f.close()</div></pre></td></tr></table></figure>
+<p><strong>pythonic</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(<span class="string">'data.txt'</span>) <span class="keyword">as</span> f:</div><div class="line">    data = f.read()</div></pre></td></tr></table></figure>
+<p>使用 with 语句，系统会在执行完文件操作后自动关闭文件对象。</p>
+<h3 id="6、列表推导式"><a href="#6、列表推导式" class="headerlink" title="6、列表推导式"></a>6、列表推导式</h3><p>能够用一行代码简明扼要地解决问题时，绝不要用两行，比如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">result = []</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div><div class="line">    s = i + <span class="number">2</span></div><div class="line">    result.append(s)</div></pre></td></tr></table></figure>
+<p><strong>pythonic</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[i+<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">10</span>)]</div></pre></td></tr></table></figure>
+<p>与之类似的还有生成器表达式、字典推导式，都是很 pythonic 的写法。</p>
+<h3 id="7、善用装饰器"><a href="#7、善用装饰器" class="headerlink" title="7、善用装饰器"></a>7、善用装饰器</h3><p>装饰器可以把与业务逻辑无关的代码抽离出来，让代码保持干净清爽，而且装饰器还能被多个地方重复利用。比如一个爬虫网页的函数，如果该 URL 曾经被爬过就直接从缓存中获取，否则爬下来之后加入到缓存，防止后续重复爬取。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">web_lookup</span><span class="params">(url, saved=&#123;&#125;)</span>:</span></div><div class="line">    <span class="keyword">if</span> url <span class="keyword">in</span> saved:</div><div class="line">        <span class="keyword">return</span> saved[url]</div><div class="line">    page = urllib.urlopen(url).read()</div><div class="line">    saved[url] = page</div><div class="line">    <span class="keyword">return</span> page</div></pre></td></tr></table></figure>
+<p><strong>pythonic</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib <span class="comment">#py2</span></div><div class="line"><span class="comment">#import urllib.request as urllib # py3</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cache</span><span class="params">(func)</span>:</span></div><div class="line">    saved = &#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(url)</span>:</span></div><div class="line">        <span class="keyword">if</span> url <span class="keyword">in</span> saved:</div><div class="line">            <span class="keyword">return</span> saved[url]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            page = func(url)</div><div class="line">            saved[url] = page</div><div class="line">            <span class="keyword">return</span> page</div><div class="line"></div><div class="line">    <span class="keyword">return</span> wrapper</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@cache</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">web_lookup</span><span class="params">(url)</span>:</span></div><div class="line">    <span class="keyword">return</span> urllib.urlopen(url).read()</div></pre></td></tr></table></figure>
+<p>用装饰器写代码表面上感觉代码量更多，但是它把缓存相关的逻辑抽离出来了，可以给更多的函数调用，这样总的代码量就会少很多，而且业务方法看起来简洁了。</p>
+<h3 id="8、合理使用列表"><a href="#8、合理使用列表" class="headerlink" title="8、合理使用列表"></a>8、合理使用列表</h3><p>列表对象（list）是一个查询效率高于更新操作的数据结构，比如删除一个元素和插入一个元素时执行效率就非常低，因为还要对剩下的元素进行移动</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">names = [<span class="string">'raymond'</span>, <span class="string">'rachel'</span>, <span class="string">'matthew'</span>, <span class="string">'roger'</span>,</div><div class="line">         <span class="string">'betty'</span>, <span class="string">'melissa'</span>, <span class="string">'judith'</span>, <span class="string">'charlie'</span>]</div><div class="line">names.pop(<span class="number">0</span>)</div><div class="line">names.insert(<span class="number">0</span>, <span class="string">'mark'</span>)</div></pre></td></tr></table></figure>
+<p><strong>pythonic</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</div><div class="line">names = deque([<span class="string">'raymond'</span>, <span class="string">'rachel'</span>, <span class="string">'matthew'</span>, <span class="string">'roger'</span>,</div><div class="line">               <span class="string">'betty'</span>, <span class="string">'melissa'</span>, <span class="string">'judith'</span>, <span class="string">'charlie'</span>])</div><div class="line">names.popleft()</div><div class="line">names.appendleft(<span class="string">'mark'</span>)</div></pre></td></tr></table></figure>
+<p>deque 是一个双向队列的数据结构，删除元素和插入元素会很快</p>
+<h3 id="9、序列解包"><a href="#9、序列解包" class="headerlink" title="9、序列解包"></a>9、序列解包</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">p = <span class="string">'vttalk'</span>, <span class="string">'female'</span>, <span class="number">30</span>, <span class="string">'python@qq.com'</span></div><div class="line"></div><div class="line">name = p[<span class="number">0</span>]</div><div class="line">gender = p[<span class="number">1</span>]</div><div class="line">age = p[<span class="number">2</span>]</div><div class="line">email = p[<span class="number">3</span>]</div></pre></td></tr></table></figure>
+<p><strong>pythonic</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">name, gender, age, email = p</div></pre></td></tr></table></figure>
+<h3 id="10、遍历字典的-key-和-value"><a href="#10、遍历字典的-key-和-value" class="headerlink" title="10、遍历字典的 key 和 value"></a>10、遍历字典的 key 和 value</h3><p>方法一速度没那么快，因为每次迭代的时候还要重新进行hash查找 key 对应的 value。</p>
+<p>方法二遇到字典非常大的时候，会导致内存的消耗增加一倍以上</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 方法一</span></div><div class="line"><span class="keyword">for</span> k <span class="keyword">in</span> d:</div><div class="line">    <span class="keyword">print</span> k, <span class="string">'---&gt;'</span>, d[k]</div><div class="line"></div><div class="line"><span class="comment"># 方法二</span></div><div class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> d.items():</div><div class="line">    <span class="keyword">print</span> k, <span class="string">'---&gt;'</span>, v</div></pre></td></tr></table></figure>
+<p><strong>pythonic</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> d.iteritems():</div><div class="line">    <span class="keyword">print</span> k, <span class="string">'---&gt;'</span>, v</div></pre></td></tr></table></figure>
+<p>iteritems 返回迭代器对象，可节省更多的内存，不过在 python3 中没有该方法了，只有 items 方法，等值于 iteritems。</p>
+<p>​当然还有很多 pythonic 写法，在此不再一一列举，说不定有第二期，欢迎留言。觉得不错就赞一个吧 (^o^)/</p>
+<p>转载自：<a href="https://gold.xitu.io/post/58b6c2e28fd9c50ef3764777" target="_blank" rel="external">代码这样写更优雅 (Python 版)</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/08/python-001-python-file-type/" rel="next" title="Python的文件类型">
+                <i class="fa fa-chevron-left"></i> Python的文件类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/09/python-003-python-comment/" rel="prev" title="Python注释">
+                Python注释 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Viking Den</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("uyYEuRKVstiSUSuSLjwTogzr-gzGzoHsz", "E1WrYee4gjwbKuLDKSkzx2rX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

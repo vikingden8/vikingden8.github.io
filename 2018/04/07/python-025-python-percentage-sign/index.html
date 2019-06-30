@@ -1,0 +1,773 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Viking Den Personal Website" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Python中字符的格式化主要有%和.format两种方式，这两种方式在Python2和Python3中都适用，这篇文章主要介绍%的字符串格式化。
+模板格式化字符串时，Python使用一个字符串作为模板。模板中有格式符，这些格式符为真实值预留位置，并说明真实数值应该呈现的格式。Python用一个tuple将多个值传递给模板，每个值对应一个格式符。
+比如下面的例子：
+123&amp;gt;&amp;gt;&amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python中字符串格式化之%">
+<meta property="og:url" content="http://vikingden.cn/2018/04/07/python-025-python-percentage-sign/index.html">
+<meta property="og:site_name" content="Viking's Website">
+<meta property="og:description" content="Python中字符的格式化主要有%和.format两种方式，这两种方式在Python2和Python3中都适用，这篇文章主要介绍%的字符串格式化。
+模板格式化字符串时，Python使用一个字符串作为模板。模板中有格式符，这些格式符为真实值预留位置，并说明真实数值应该呈现的格式。Python用一个tuple将多个值传递给模板，每个值对应一个格式符。
+比如下面的例子：
+123&amp;gt;&amp;gt;&amp;gt;">
+<meta property="og:updated_time" content="2019-06-30T14:05:41.341Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python中字符串格式化之%">
+<meta name="twitter:description" content="Python中字符的格式化主要有%和.format两种方式，这两种方式在Python2和Python3中都适用，这篇文章主要介绍%的字符串格式化。
+模板格式化字符串时，Python使用一个字符串作为模板。模板中有格式符，这些格式符为真实值预留位置，并说明真实数值应该呈现的格式。Python用一个tuple将多个值传递给模板，每个值对应一个格式符。
+比如下面的例子：
+123&amp;gt;&amp;gt;&amp;gt;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"remove"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vikingden.cn/2018/04/07/python-025-python-percentage-sign/"/>
+
+
+
+
+
+  <title> Python中字符串格式化之% | Viking's Website </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Viking's Website</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Notes, thoughts, stories.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://vikingden.cn/2018/04/07/python-025-python-percentage-sign/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Viking Den">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/16629000?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Viking's Website">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Viking's Website" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python中字符串格式化之%
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-07T14:55:08+08:00">
+                2018-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/07/python-025-python-percentage-sign/" class="leancloud_visitors" data-flag-title="Python中字符串格式化之%">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Python中字符的格式化主要有%和.format两种方式，这两种方式在Python2和Python3中都适用，这篇文章主要介绍%的字符串格式化。</p>
+<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>格式化字符串时，Python使用一个字符串作为模板。模板中有格式符，这些格式符为真实值预留位置，并说明真实数值应该呈现的格式。Python用一个tuple将多个值传递给模板，每个值对应一个格式符。</p>
+<p>比如下面的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">"I'm %s. I'm %d year old"</span> % (<span class="string">'Viking Den'</span>, <span class="number">29</span>))</div><div class="line">I<span class="string">'m Viking Den. I'</span>m <span class="number">29</span> year old</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>上面的例子中，</p>
+<p>“I’m %s. I’m %d year old” 为我们的模板。%s为第一个格式符，表示一个字符串。%d为第二个格式符，表示一个整数。(‘Viking Den’, 29)的两个元素’Viking Den’和99为替换%s和%d的真实值。在模板和tuple之间，有一个%号分隔，它代表了格式化操作。</p>
+<p>整个”I’m %s. I’m %d year old” % (‘Viking Den’, 29) 实际上构成一个字符串表达式。我们可以像一个正常的字符串那样，将它赋值给某个变量。比如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>text = <span class="string">"I'm %s. I'm %d year old"</span> % (<span class="string">'Viking Den'</span>, <span class="number">29</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>print(text)</div><div class="line">I<span class="string">'m Viking Den. I'</span>m <span class="number">29</span> year old</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<p>我们还可以用词典来传递真实值。如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">"I'm %(name)s. I'm %(age)d year old"</span> % &#123;<span class="string">'name'</span>:<span class="string">'Viking Den'</span>,<span class="string">'age'</span>:<span class="number">29</span>&#125;)</div><div class="line">I<span class="string">'m Viking Den. I'</span>m <span class="number">29</span> year old</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<p>可以看到，我们对两个格式符进行了命名。命名使用()括起来。每个命名对应词典的一个key。</p>
+<h3 id="格式符"><a href="#格式符" class="headerlink" title="格式符"></a>格式符</h3><p>格式符为真实值预留位置，并控制显示的格式。</p>
+<h4 id="参数格式"><a href="#参数格式" class="headerlink" title="参数格式"></a>参数格式</h4><blockquote>
+<p><strong>%[(name)][flags][width].[precision]typecode</strong></p>
+</blockquote>
+<ul>
+<li>[(name)]</li>
+</ul>
+<p>可选，用于选择指定的key</p>
+<ul>
+<li>[flags]</li>
+</ul>
+<p>可选，可供选择的值有:</p>
+<blockquote>
+<ul>
+<li>右对齐；正数前加正好，负数前加负号</li>
+</ul>
+<ul>
+<li>左对齐；正数前无符号，负数前加负号<br>space    右对齐；正数前加空格，负数前加负号<br>0        右对齐；正数前无符号，负数前加负号；用0填充空白处</li>
+</ul>
+</blockquote>
+<ul>
+<li>[width]</li>
+</ul>
+<p>可选，占有宽度</p>
+<ul>
+<li>.[precision]</li>
+</ul>
+<p>可选，小数点后保留的位数</p>
+<ul>
+<li>typecode</li>
+</ul>
+<p>必选，参数如下：</p>
+<blockquote>
+<ul>
+<li><p>%s    字符串 (采用str()的显示)</p>
+</li>
+<li><p>%r    字符串 (采用repr()的显示)</p>
+</li>
+<li><p>%c    单个字符</p>
+</li>
+<li><p>%b    二进制整数</p>
+</li>
+<li><p>%d    十进制整数</p>
+</li>
+<li><p>%i    十进制整数</p>
+</li>
+<li><p>%o    八进制整数</p>
+</li>
+<li><p>%x    十六进制整数</p>
+</li>
+<li><p>%e    指数 (基底写为e)</p>
+</li>
+<li><p>%E    指数 (基底写为E)</p>
+</li>
+<li><p>%f    浮点数</p>
+</li>
+<li><p>%F    浮点数，与上相同</p>
+</li>
+<li><p>%g    指数(e)或浮点数 (根据显示长度)</p>
+</li>
+<li><p>%G    指数(E)或浮点数 (根据显示长度)</p>
+</li>
+<li><p>%%    字符”%”</p>
+</li>
+</ul>
+</blockquote>
+<p>例子：</p>
+<ul>
+<li>去浮点数后面的位数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># %.2f小数后面只取两位</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>string = <span class="string">"percent %.2f"</span> % <span class="number">99.97623</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>string</div><div class="line"><span class="string">'percent 99.98'</span></div><div class="line"></div><div class="line"><span class="comment"># 给浮点数起一个名字(key)</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>string = <span class="string">"percent %(pp).2f"</span> % &#123;<span class="string">"pp"</span>: <span class="number">99.97623</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>string</div><div class="line"><span class="string">'percent 99.98'</span></div><div class="line"></div><div class="line"><span class="comment"># 两个百分号代表一个百分号</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>string = <span class="string">"percent %(pp).2f%%"</span> % &#123;<span class="string">"pp"</span>: <span class="number">99.97623</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>string</div><div class="line"><span class="string">'percent 99.98%'</span></div></pre></td></tr></table></figure>
+<h3 id="参考引用"><a href="#参考引用" class="headerlink" title="参考引用"></a>参考引用</h3><p><a href="http://python.jobbole.com/82673/" target="_blank" rel="external">Python 快速教程（补充篇05）：字符串格式化 (%操作符)</a></p>
+<p><a href="https://segmentfault.com/a/1190000008285514" target="_blank" rel="external">Python全栈之路系列之字符串格式化</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/05/python-024-python-set/" rel="next" title="Python中set">
+                <i class="fa fa-chevron-left"></i> Python中set
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/07/python-026-python-string-format/" rel="prev" title="Python使用{}和format的字符串格式化">
+                Python使用{}和format的字符串格式化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Viking Den</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("uyYEuRKVstiSUSuSLjwTogzr-gzGzoHsz", "E1WrYee4gjwbKuLDKSkzx2rX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

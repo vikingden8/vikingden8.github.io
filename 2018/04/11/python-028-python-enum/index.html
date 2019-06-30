@@ -1,0 +1,719 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Viking Den Personal Website" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="转载自：Python 中的枚举类型
+枚举类型可以看作是一种标签或是一系列常量的集合，通常用于表示某些特定的有限集合，例如星期、月份、状态等。Python 的原生类型（Built-in types）里并没有专门的枚举类型，但是我们可以通过很多方法来实现它，例如字典、类等：
+1234567891011WEEKDAY = &amp;#123;    &apos;MON&apos;: 1,    &apos;TUS&apos;: 2,    &apos;WEN&apos;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 中的枚举类型">
+<meta property="og:url" content="http://vikingden.cn/2018/04/11/python-028-python-enum/index.html">
+<meta property="og:site_name" content="Viking's Website">
+<meta property="og:description" content="转载自：Python 中的枚举类型
+枚举类型可以看作是一种标签或是一系列常量的集合，通常用于表示某些特定的有限集合，例如星期、月份、状态等。Python 的原生类型（Built-in types）里并没有专门的枚举类型，但是我们可以通过很多方法来实现它，例如字典、类等：
+1234567891011WEEKDAY = &amp;#123;    &apos;MON&apos;: 1,    &apos;TUS&apos;: 2,    &apos;WEN&apos;">
+<meta property="og:updated_time" content="2019-06-30T14:05:41.345Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 中的枚举类型">
+<meta name="twitter:description" content="转载自：Python 中的枚举类型
+枚举类型可以看作是一种标签或是一系列常量的集合，通常用于表示某些特定的有限集合，例如星期、月份、状态等。Python 的原生类型（Built-in types）里并没有专门的枚举类型，但是我们可以通过很多方法来实现它，例如字典、类等：
+1234567891011WEEKDAY = &amp;#123;    &apos;MON&apos;: 1,    &apos;TUS&apos;: 2,    &apos;WEN&apos;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"remove"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vikingden.cn/2018/04/11/python-028-python-enum/"/>
+
+
+
+
+
+  <title> Python 中的枚举类型 | Viking's Website </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Viking's Website</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Notes, thoughts, stories.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://vikingden.cn/2018/04/11/python-028-python-enum/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Viking Den">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/16629000?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Viking's Website">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Viking's Website" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python 中的枚举类型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-11T19:01:08+08:00">
+                2018-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/11/python-028-python-enum/" class="leancloud_visitors" data-flag-title="Python 中的枚举类型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转载自：<a href="http://python.jobbole.com/84112/" target="_blank" rel="external">Python 中的枚举类型</a></p>
+<p>枚举类型可以看作是一种标签或是一系列常量的集合，通常用于表示某些特定的有限集合，例如星期、月份、状态等。Python 的原生类型（Built-in types）里并没有专门的枚举类型，但是我们可以通过很多方法来实现它，例如字典、类等：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">WEEKDAY = &#123;</div><div class="line">    <span class="string">'MON'</span>: <span class="number">1</span>,</div><div class="line">    <span class="string">'TUS'</span>: <span class="number">2</span>,</div><div class="line">    <span class="string">'WEN'</span>: <span class="number">3</span>,</div><div class="line">    <span class="string">'THU'</span>: <span class="number">4</span>,</div><div class="line">    <span class="string">'FRI'</span>: <span class="number">5</span></div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Color</span>:</span></div><div class="line">    RED   = <span class="number">0</span></div><div class="line">    GREEN = <span class="number">1</span></div><div class="line">    BLUE  = <span class="number">2</span></div></pre></td></tr></table></figure>
+<p>上面两种方法可以看做是简单的枚举类型的实现，如果只在局部范围内用到了这样的枚举变量是没有问题的，但问题在于它们都是可变的（mutable），也就是说可以在其它地方被修改从而影响其正常使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">WEEKDAY[<span class="string">'MON'</span>] = WEEKDAY[<span class="string">'FRI'</span>]</div><div class="line">print(WEEKDAY)</div><div class="line">&#123;<span class="string">'FRI'</span>: <span class="number">5</span>, <span class="string">'TUS'</span>: <span class="number">2</span>, <span class="string">'MON'</span>: <span class="number">5</span>, <span class="string">'WEN'</span>: <span class="number">3</span>, <span class="string">'THU'</span>: <span class="number">4</span>&#125;</div></pre></td></tr></table></figure>
+<p>通过类定义的枚举甚至可以实例化，变得不伦不类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">c = Color()</div><div class="line">print(c.RED)</div><div class="line">Color.RED = <span class="number">2</span></div><div class="line">print(c.RED)</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">0</div><div class="line">2</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>当然也可以使用不可变类型（immutable），例如元组，但是这样就失去了枚举类型的本意，将标签退化为无意义的变量：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">COLOR = (<span class="string">'R'</span>, <span class="string">'G'</span>, <span class="string">'B'</span>)</div><div class="line">print(COLOR[<span class="number">0</span>], COLOR[<span class="number">1</span>], COLOR[<span class="number">2</span>])</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">R G B</div></pre></td></tr></table></figure>
+<p>为了提供更好的解决方案，Python 通过 PEP 435 在 3.4 版本中添加了 enum 标准库，3.4 之前的版本也可以通过 pip install enum 下载兼容支持的库。enum 提供了 Enum/IntEnum/unique 三个工具，用法也非常简单，可以通过继承 Enum/IntEnum 定义枚举类型，其中 IntEnum 限定枚举成员必须为（或可以转化为）整数类型，而 unique 方法可以作为修饰器限定枚举成员的值不可重复：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum, IntEnum, unique</div><div class="line"> </div><div class="line"><span class="keyword">try</span>:</div><div class="line"><span class="meta">    @unique</span></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">WEEKDAY</span><span class="params">(Enum)</span>:</span></div><div class="line">        MON = <span class="number">1</span></div><div class="line">        TUS = <span class="number">2</span></div><div class="line">        WEN = <span class="number">3</span></div><div class="line">        THU = <span class="number">4</span></div><div class="line">        FRI = <span class="number">1</span></div><div class="line"><span class="keyword">except</span> ValueError <span class="keyword">as</span> e:</div><div class="line">    print(e)</div></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">duplicate values found in : FRI -&gt; MON</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>:</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(IntEnum)</span>:</span></div><div class="line">        RED   = <span class="number">0</span></div><div class="line">        GREEN = <span class="number">1</span></div><div class="line">        BLUE  = <span class="string">'b'</span></div><div class="line"><span class="keyword">except</span> ValueError <span class="keyword">as</span> e:</div><div class="line">    print(e)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">invalid literal <span class="keyword">for</span> int() with base 10: <span class="string">'b'</span></div></pre></td></tr></table></figure>
+<p>更有趣的是 Enum 的成员均为单例（Singleton），并且不可实例化，不可更改：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(Enum)</span>:</span></div><div class="line">    R = <span class="number">0</span></div><div class="line">    G = <span class="number">1</span></div><div class="line">    B = <span class="number">2</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>:</div><div class="line">    Color.R = <span class="number">2</span></div><div class="line"><span class="keyword">except</span> AttributeError <span class="keyword">as</span> e:</div><div class="line">    print(e)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Cannot reassign members.</div></pre></td></tr></table></figure>
+<p>虽然不可实例化，但可以将枚举成员赋值给变量：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">red = Color(<span class="number">0</span>)</div><div class="line">green = Color(<span class="number">1</span>)</div><div class="line">blue = Color(<span class="number">2</span>)</div><div class="line">print(red, green, blue)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Color.R Color.G Color.B</div></pre></td></tr></table></figure>
+<p>也可以进行比较判断：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">print(red <span class="keyword">is</span> Color.R)</div><div class="line">print(red == Color.R)</div><div class="line">print(red <span class="keyword">is</span> blue)</div><div class="line">print(green != Color.B)</div><div class="line">print(red == <span class="number">0</span>) <span class="comment"># 不等于任何非本枚举类的值</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">True</div><div class="line">True</div><div class="line">False</div><div class="line">True</div><div class="line">False</div></pre></td></tr></table></figure>
+<p>最后一点，由于枚举成员本身也是枚举类型，因此也可以通过枚举成员找到其它成员：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(red.B)</div><div class="line">print(red.B.G.R)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Color.B</div><div class="line">Color.R</div></pre></td></tr></table></figure>
+<p>但是要谨慎使用这一特性，因为可能与成员原有的命名空间中的名称相冲突：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">print(red.name, <span class="string">':'</span>, red.value)</div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Attr</span><span class="params">(Enum)</span>:</span></div><div class="line">    name  = <span class="string">'NAME'</span></div><div class="line">    value = <span class="string">'VALUE'</span></div><div class="line">print(Attr.name.value, Attr.value.name)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">R : 0</div><div class="line">NAME value</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/08/python-027-python-global-vs-return/" rel="next" title="Python Global vs Return">
+                <i class="fa fa-chevron-left"></i> Python Global vs Return
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/07/python-029-python-instance-class-static-methods/" rel="prev" title="Python's Instance, Class and Static Methods">
+                Python's Instance, Class and Static Methods <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Viking Den</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("uyYEuRKVstiSUSuSLjwTogzr-gzGzoHsz", "E1WrYee4gjwbKuLDKSkzx2rX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

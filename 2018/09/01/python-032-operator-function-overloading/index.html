@@ -1,0 +1,741 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Viking Den Personal Website" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文翻译自[有删改]：Operator and Function Overloading in Custom Python Classes
+如果你已经在Python使用过 str 的 + 和 * 操作符，你肯定注意到它相对于 int 或 float 对象的 + 和 * 操作有不同之处。
+12345678910111213141516&amp;gt;&amp;gt;&amp;gt; # Adds the two numbe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python中的操作符重载">
+<meta property="og:url" content="http://vikingden.cn/2018/09/01/python-032-operator-function-overloading/index.html">
+<meta property="og:site_name" content="Viking's Website">
+<meta property="og:description" content="本文翻译自[有删改]：Operator and Function Overloading in Custom Python Classes
+如果你已经在Python使用过 str 的 + 和 * 操作符，你肯定注意到它相对于 int 或 float 对象的 + 和 * 操作有不同之处。
+12345678910111213141516&amp;gt;&amp;gt;&amp;gt; # Adds the two numbe">
+<meta property="og:updated_time" content="2019-06-30T14:05:41.348Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python中的操作符重载">
+<meta name="twitter:description" content="本文翻译自[有删改]：Operator and Function Overloading in Custom Python Classes
+如果你已经在Python使用过 str 的 + 和 * 操作符，你肯定注意到它相对于 int 或 float 对象的 + 和 * 操作有不同之处。
+12345678910111213141516&amp;gt;&amp;gt;&amp;gt; # Adds the two numbe">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"remove"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vikingden.cn/2018/09/01/python-032-operator-function-overloading/"/>
+
+
+
+
+
+  <title> Python中的操作符重载 | Viking's Website </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Viking's Website</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Notes, thoughts, stories.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://vikingden.cn/2018/09/01/python-032-operator-function-overloading/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Viking Den">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/16629000?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Viking's Website">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Viking's Website" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python中的操作符重载
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-01T10:40:08+08:00">
+                2018-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/09/01/python-032-operator-function-overloading/" class="leancloud_visitors" data-flag-title="Python中的操作符重载">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文翻译自[有删改]：<a href="https://realpython.com/operator-function-overloading/" target="_blank" rel="external">Operator and Function Overloading in Custom Python Classes</a></p>
+<p>如果你已经在Python使用过 str 的 + 和 * 操作符，你肯定注意到它相对于 int 或 float 对象的 + 和 * 操作有不同之处。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Adds the two numbers</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">1</span> + <span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Concatenates the two strings</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Real'</span> + <span class="string">'Python'</span></div><div class="line"><span class="string">'RealPython'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Gives the product</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span> * <span class="number">2</span></div><div class="line"><span class="number">6</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Repeats the string</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Python'</span> * <span class="number">3</span></div><div class="line"><span class="string">'PythonPythonPython'</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>你可能会好奇，同样的内建操作符或函数为啥会对不同的对象表现出不同的行为。其实，这在Python中被称作为操作符重载或函数重载。这篇文章将帮助你理解这种机制，你可以在自己的Python类中实现同样的重载功能，让你写的对象更具Pythonic。</p>
+<h3 id="Python对象模型"><a href="#Python对象模型" class="headerlink" title="Python对象模型"></a>Python对象模型</h3><p>假想你现在有一个类代表网上的订单，里面有购物清单（list），以及一个消费者对象（可以是一 str 或另一个代表消费者的对象类）。</p>
+<p>在这种情况下，很自然地想要获取当前购物清单的长度。有一些Python新学者可能决定实现一个叫  get_cart_len() 的方法。但是，你可以查到，其实在Python中提供了内建函数 len() 来返回购物清单的长度。</p>
+<p>另外一种情况，我们可能想要往购物清单中添加新的。同样，有些Python新学者可能会去实现一个方法叫 append_to_cart() 来添加新的清单。但是，你可以发现，其实内建的 + 操作符同样可以达到添加新的清单到购物清单中。</p>
+<p>Python使用特别的方法都为你实现了上述的功能。那些特别的方法都是以双下划线开始，然后就是一个名称，可以以双下划线结束，比如 __name__.</p>
+<p>本质上，每一个内建函数或操作符都对应有一个特别的方法。例如， __len__() 对应内建函数 len() ，以及 __add__() 对应操作符 + .</p>
+<p>默认情况下，大部分的内建函数或者操作符对你的自定义类并不起作用。你必须在你的类中实现对应的特殊方法来使你的对应兼容内建函数或操作符。</p>
+<p>当你这样实现之后，你类中的函数或操作符行为将会根据你定义的那些方法随着改变。</p>
+<h3 id="操作符-len-和-的内部实现原理"><a href="#操作符-len-和-的内部实现原理" class="headerlink" title="操作符 len() 和 [] 的内部实现原理"></a>操作符 len() 和 [] 的内部实现原理</h3><p>Python中的每个类都有定义内建函数或方法对应的行为。比如，当你在某个类的实例上使用内建函数或者操作符时，其实也就是相当于在调用它定义的特殊方法。</p>
+<p>如果有一个内建函数 func() ，其对应的特殊方法就是 __func__()，Python会把 func() 理解为 obj.__func__() 。对于操作符，如果你有一个操作符 opr， 那么其对应的特殊方法就是 __opr__()，Python会把 obj1 opr obj2 解释为 obj1.__opr__(obj2) 。</p>
+<p>于是，当你在对象上使用 len() 时，Python会处理成 obj.__len__() 。当你在一个可迭代对象上使用 [] 操作符来获取特定位置上的值时，Python其实会使用 itr.__getitem__(index) 。</p>
+<p>当你在自己的实现类中定义了那些特殊的方法后，你就重写了那些函数或操作符的行为。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">'Real Python'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b = [<span class="string">'Real'</span>, <span class="string">'Python'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(a)</div><div class="line"><span class="number">11</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.__len__()</div><div class="line"><span class="number">11</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b[<span class="number">0</span>]</div><div class="line"><span class="string">'Real'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b.__getitem__(<span class="number">0</span>)</div><div class="line"><span class="string">'Real'</span></div></pre></td></tr></table></figure>
+<p>从上面的例子可以看出，不管你使用函数或者对应的特殊方法，得到了同样地的输出结果。其实， 但你使用内建的 dir() 函数查看 str 对象的所有属性和方法时，你将会看到那些特殊方法包含在其中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>dir(a)</div><div class="line">[<span class="string">'__add__'</span>,</div><div class="line"> <span class="string">'__class__'</span>,</div><div class="line"> <span class="string">'__contains__'</span>,</div><div class="line"> <span class="string">'__delattr__'</span>,</div><div class="line"> <span class="string">'__dir__'</span>,</div><div class="line"> ...,</div><div class="line"> <span class="string">'__iter__'</span>,</div><div class="line"> <span class="string">'__le__'</span>,</div><div class="line"> <span class="string">'__len__'</span>,</div><div class="line"> <span class="string">'__lt__'</span>,</div><div class="line"> ...,</div><div class="line"> <span class="string">'swapcase'</span>,</div><div class="line"> <span class="string">'title'</span>,</div><div class="line"> <span class="string">'translate'</span>,</div><div class="line"> <span class="string">'upper'</span>,</div><div class="line"> <span class="string">'zfill'</span>]</div></pre></td></tr></table></figure>
+<p> 如果你调用的内建函数或操作符在类中没有对应的特殊方法实现，而你调用后将会得到一个 TypeError 错误。</p>
+<p> 那如果在你自定义的类中使用特殊方法呢？</p>
+<h3 id="内建函数的重载"><a href="#内建函数的重载" class="headerlink" title="内建函数的重载"></a>内建函数的重载</h3><p> 在对象模型中定义的许多特殊方法能应用在改变函数行为上，如 len, ads, hash, div, mod 等等。为了实现，你可以在自定义的类中实现相对应的特殊方法。</p>
+<h4 id="使用-len-返回对象长度"><a href="#使用-len-返回对象长度" class="headerlink" title="使用 len() 返回对象长度"></a>使用 len() 返回对象长度</h4><p> 为了改变 len() 的默认行为，你需要在你的类中实现 __len__() 特殊方法。不管什么时候调用 len() 方法，都会使用你自定义的 __len__() 方法。现在来实现下开始说到的购物清单：</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Order</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cart, customer)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart = list(cart)</div><div class="line"><span class="meta">... </span>        self.customer = customer</div><div class="line">...</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> len(self.cart)</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = Order([<span class="string">'banana'</span>, <span class="string">'apple'</span>, <span class="string">'mango'</span>], <span class="string">'Real Python'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(order)</div><div class="line"><span class="number">3</span></div></pre></td></tr></table></figure>
+<p> 可以看出，现在可以通过内建的 len() 方法来获取清单的大小。当你没有自定义 __len__() 方法时，去使用 len() 时，会出现 TypeError :</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Order</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cart, customer)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart = list(cart)</div><div class="line"><span class="meta">... </span>        self.customer = customer</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = Order([<span class="string">'banana'</span>, <span class="string">'apple'</span>, <span class="string">'mango'</span>], <span class="string">'Real Python'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(order)  <span class="comment"># Calling len when no __len__</span></div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">TypeError: object of type <span class="string">'Order'</span> has no len()</div></pre></td></tr></table></figure>
+<p> 但是，需要注意的是，在重载 len() 方法时，必须要返回一个整型值。如果你的方法返回的不是整型值，那么就会得到一个 TypeError 。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"> &gt;&gt;&gt; <span class="class"><span class="keyword">class</span> <span class="title">Order</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cart, customer)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart = list(cart)</div><div class="line"><span class="meta">... </span>        self.customer = customer</div><div class="line">...</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> float(len(self.cart))  <span class="comment"># Return type changed to float</span></div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = Order([<span class="string">'banana'</span>, <span class="string">'apple'</span>, <span class="string">'mango'</span>], <span class="string">'Real Python'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>len(order)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">TypeError: <span class="string">'float'</span> object cannot be interpreted <span class="keyword">as</span> an integer</div></pre></td></tr></table></figure>
+<h4 id="使用-str-打印对象"><a href="#使用-str-打印对象" class="headerlink" title="使用 str() 打印对象"></a>使用 str() 打印对象</h4><p>内建函数 str() 的作用是把一个对象实例转换成 str 对象，或者更形象地说，变成一个对非计算机用户来说更友好的字符表示形式。你可以通过 __str__() 方法定义字符的格式。而且， __str__() 方法也被Python在你的对象被使用 print() 函数时调用。</p>
+<h3 id="重载操作符"><a href="#重载操作符" class="headerlink" title="重载操作符"></a>重载操作符</h3><p>改变操作符的默认行为和内建函数类似。在你的自定义类中定义对应的特殊方法，操作符的行为将是你定义的方法行为。</p>
+<h4 id="自定义对象使用"><a href="#自定义对象使用" class="headerlink" title="自定义对象使用 +"></a>自定义对象使用 +</h4><ul>
+<li>操作符对应的特殊方法为 __add__() 。在类中添加自定义的 __add__() 方法将改变操作符的默认行为。在这里建议，自定义 __add__() 方法时返回一个新的对象而不是在原有的对象上修改返回。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">'Real'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a + <span class="string">'Python'</span>  <span class="comment"># Gives new str instance</span></div><div class="line"><span class="string">'RealPython'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a  <span class="comment"># Values unchanged</span></div><div class="line"><span class="string">'Real'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = a + <span class="string">'Python'</span>  <span class="comment"># Creates new instance and assigns a to it</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line"><span class="string">'RealPython'</span></div></pre></td></tr></table></figure>
+<p>可以看出，当在 str 上使用 + 操作符时是返回一个新的对象实例，从而使得 a 的值未曾改变。如果要改变它，我们需要显式的给 a 赋值一个新的值。</p>
+<p>让我们来实现之前的例子，使用操作符 + 在原有的清单上添加新的清单。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Order</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cart, customer)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart = list(cart)</div><div class="line"><span class="meta">... </span>        self.customer = customer</div><div class="line">...</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></div><div class="line"><span class="meta">... </span>        new_cart = self.cart.copy()</div><div class="line"><span class="meta">... </span>        new_cart.append(other)</div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> Order(new_cart, self.customer)</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = Order([<span class="string">'banana'</span>, <span class="string">'apple'</span>], <span class="string">'Real Python'</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>(order + <span class="string">'orange'</span>).cart  <span class="comment"># New Order instance</span></div><div class="line">[<span class="string">'banana'</span>, <span class="string">'apple'</span>, <span class="string">'mango'</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order.cart  <span class="comment"># Original instance unchanged</span></div><div class="line">[<span class="string">'banana'</span>, <span class="string">'apple'</span>]</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = order + <span class="string">'mango'</span>  <span class="comment"># Changing the original instance</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order.cart</div><div class="line">[<span class="string">'banana'</span>, <span class="string">'apple'</span>, <span class="string">'mango'</span>]</div></pre></td></tr></table></figure>
+<h4 id="操作符"><a href="#操作符" class="headerlink" title="操作符 +="></a>操作符 +=</h4><p>操作符 += 代表是的是表达式 obj1 = obj1 + obj2 的简写形式。其对应的特殊方法是 __iadd__() 。需要注意的是， __iadd__() 方法应该修改对象自身并返回结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Order</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cart, customer)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart = list(cart)</div><div class="line"><span class="meta">... </span>        self.customer = customer</div><div class="line">...</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__iadd__</span><span class="params">(self, other)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart.append(other)</div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> self</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = Order([<span class="string">'banana'</span>, <span class="string">'apple'</span>], <span class="string">'Real Python'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order += <span class="string">'mango'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order.cart</div><div class="line">[<span class="string">'banana'</span>, <span class="string">'apple'</span>, <span class="string">'mango'</span>]</div></pre></td></tr></table></figure>
+<p>从上可以看出，任何的改变都直接修改了对象本身并返回。那如果在返回值是随机的值，比如字符或整数，会发生什么呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Order</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cart, customer)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart = list(cart)</div><div class="line"><span class="meta">... </span>        self.customer = customer</div><div class="line">...</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__iadd__</span><span class="params">(self, other)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart.append(other)</div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="string">'Hey, I am string!'</span></div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = Order([<span class="string">'banana'</span>, <span class="string">'apple'</span>], <span class="string">'Real Python'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order += <span class="string">'mango'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order</div><div class="line"><span class="string">'Hey, I am string!'</span></div></pre></td></tr></table></figure>
+<p>虽然相对应的条目被添加进清单中，但是最终的返回值被 __iadd__() 方法修改了。Python隐式地为你作了一次赋值操作。如果在你实现时忘记返回值是，这将会出现一些意想不到的行为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Order</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cart, customer)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart = list(cart)</div><div class="line"><span class="meta">... </span>        self.customer = customer</div><div class="line">...</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__iadd__</span><span class="params">(self, other)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart.append(other)</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = Order([<span class="string">'banana'</span>, <span class="string">'apple'</span>], <span class="string">'Real Python'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order += <span class="string">'mango'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order  <span class="comment"># No output</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(order)</div><div class="line">NoneType</div></pre></td></tr></table></figure>
+<p>因为所有的Python函数或方法如果没有显式返回值时，默认会返回 None。当你的交互模式下打印 order 时不会有任何的输出，但是当你查看其对象类型时，你会发现返回了 NoneType。所以，在确保你自定义实现 __iadd__() 方法时记得指定返回值。</p>
+<p>和 __iadd__() 类似地，还有 __isub__(), __imul__(), __idiv__()，分别对应操作符 -=, *=, /=。</p>
+<h4 id="在你的对象上使用切片"><a href="#在你的对象上使用切片" class="headerlink" title="在你的对象上使用切片"></a>在你的对象上使用切片</h4><p>操作符 [] 被称作为索引操作，常被用在序列中得到某个索引的值，或得到字典中某个键的值，或通过切片的方式得到序列的部分值。你可以通过 __getitem__() 特殊方法来改变其行为。</p>
+<p>在 Order 类中我们可以直接通过对象访问到具体的清单</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Order</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cart, customer)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart = list(cart)</div><div class="line"><span class="meta">... </span>        self.customer = customer</div><div class="line">...</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, key)</span>:</span></div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> self.cart[key]</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = Order([<span class="string">'banana'</span>, <span class="string">'apple'</span>], <span class="string">'Real Python'</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order[<span class="number">0</span>]</div><div class="line"><span class="string">'banana'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order[<span class="number">-1</span>]</div><div class="line"><span class="string">'apple'</span></div></pre></td></tr></table></figure>
+<p>可以注意到，__getitem__()方法的参数名不是 index 而是 key 。这是因为此参数有三种可能的类型，第一种是：整型值，这种情况下它可能是索引或者字典的键；一种情况是：字符，这种情况下是字典的键；还有一种情况是：切片对象，这种情况下，它将对对象进行切片操作。</p>
+<p>因为我们内部的数据结构是列表，我们可以使用操作符 [] 进行列表的切片操作， 参数 key 是一切片对象。</p>
+<h4 id="反向操作符"><a href="#反向操作符" class="headerlink" title="反向操作符"></a>反向操作符</h4><p>当你定义好了 __add__(), __sub__(), __mul__() 之后，你的特殊方法只会对左边的值操作起作用，这些操作符将不会对右边的操作方式起作用，看下面的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Mock</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num)</span>:</span></div><div class="line"><span class="meta">... </span>        self.num = num</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> Mock(self.num + other)</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mock = Mock(<span class="number">5</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mock = mock + <span class="number">6</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mock.num</div><div class="line"><span class="number">11</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mock = <span class="number">6</span> + Mock(<span class="number">5</span>)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">TypeError: unsupported operand type(s) <span class="keyword">for</span> +: <span class="string">'int'</span> <span class="keyword">and</span> <span class="string">'Mock'</span></div></pre></td></tr></table></figure>
+<p>可以看出，自定义对象虽然定义了 __add__() 方法，但是对自定义对象在右边的操作符 + 处理会出现 TypeError 错误。其实，如果上述的方式同样起作用的话，Python提供了反向特殊方法比如<br> __radd__(), __rsub__(), __rmul__() 等等。</p>
+<p> 它们处理比如 x + obj, x - obj, 和 x * obj，这里的 x 不是我们自定义的类实例。和 __add__() 一样，这些反向特殊函数应该返回新的实例对象而不是去修改对象实例本身。</p>
+<p> 下面看下在 Order 中实现 __radd__() 方法：</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Order</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, cart, customer)</span>:</span></div><div class="line"><span class="meta">... </span>        self.cart = list(cart)</div><div class="line"><span class="meta">... </span>        self.customer = customer</div><div class="line">...</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__add__</span><span class="params">(self, other)</span>:</span></div><div class="line"><span class="meta">... </span>        new_cart = self.cart.copy()</div><div class="line"><span class="meta">... </span>        new_cart.append(other)</div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> Order(new_cart, self.customer)</div><div class="line">...</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__radd__</span><span class="params">(self, other)</span>:</span></div><div class="line"><span class="meta">... </span>        new_cart = self.cart.copy()</div><div class="line"><span class="meta">... </span>        new_cart.insert(<span class="number">0</span>, other)</div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> Order(new_cart, self.customer)</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = Order([<span class="string">'banana'</span>, <span class="string">'apple'</span>], <span class="string">'Real Python'</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = order + <span class="string">'orange'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order.cart</div><div class="line">[<span class="string">'banana'</span>, <span class="string">'apple'</span>, <span class="string">'orange'</span>]</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order = <span class="string">'mango'</span> + order</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>order.cart</div><div class="line">[<span class="string">'mango'</span>, <span class="string">'banana'</span>, <span class="string">'apple'</span>, <span class="string">'orange'</span>]</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/30/python-031-python-dict-get-default-value/" rel="next" title="使用Python字典中的get方法返回默认值">
+                <i class="fa fa-chevron-left"></i> 使用Python字典中的get方法返回默认值
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/15/python-033-primer-on-python-decorators/" rel="prev" title="Python装饰器入门">
+                Python装饰器入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Viking Den</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("uyYEuRKVstiSUSuSLjwTogzr-gzGzoHsz", "E1WrYee4gjwbKuLDKSkzx2rX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

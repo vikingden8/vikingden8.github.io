@@ -1,0 +1,783 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Viking Den Personal Website" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Origin from : What are the differences between tuples and lists in Python?
+First let me clear what is a list and tuple in Python and then I will differentiate it on the basis of mutability, functions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What are the differences between tuples and lists in Python?">
+<meta property="og:url" content="http://vikingden.cn/2018/04/05/python-023-what-are-the-differences-between-tuples-and-lists-in-python/index.html">
+<meta property="og:site_name" content="Viking's Website">
+<meta property="og:description" content="Origin from : What are the differences between tuples and lists in Python?
+First let me clear what is a list and tuple in Python and then I will differentiate it on the basis of mutability, functions">
+<meta property="og:updated_time" content="2019-06-30T14:05:41.340Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What are the differences between tuples and lists in Python?">
+<meta name="twitter:description" content="Origin from : What are the differences between tuples and lists in Python?
+First let me clear what is a list and tuple in Python and then I will differentiate it on the basis of mutability, functions">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"remove"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vikingden.cn/2018/04/05/python-023-what-are-the-differences-between-tuples-and-lists-in-python/"/>
+
+
+
+
+
+  <title> What are the differences between tuples and lists in Python? | Viking's Website </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Viking's Website</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Notes, thoughts, stories.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://vikingden.cn/2018/04/05/python-023-what-are-the-differences-between-tuples-and-lists-in-python/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Viking Den">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/16629000?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Viking's Website">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Viking's Website" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                What are the differences between tuples and lists in Python?
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-05T08:45:08+08:00">
+                2018-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/05/python-023-what-are-the-differences-between-tuples-and-lists-in-python/" class="leancloud_visitors" data-flag-title="What are the differences between tuples and lists in Python?">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Origin from : <a href="https://www.quora.com/What-are-the-differences-between-tuples-and-lists-in-Python" target="_blank" rel="external">What are the differences between tuples and lists in Python?</a></p>
+<p>First let me clear what is a list and tuple in Python and then I will differentiate it on the basis of mutability, functions methods, tuple in a list, list in a tuple, nested tuples, nested lists</p>
+<p>首先，我会阐述在Python中什么是list和tuple，然后我会列出两者的不同，比如可变性，函数方法，list中的tuple，tuple中的list，嵌套的tuple，嵌套的list。</p>
+<p>and When Can You Use Which?</p>
+<p>还有，就是在什么情况下该选择哪种。</p>
+<ul>
+<li><p><strong>Tuple</strong>: A tuple is a collection of values and it is declared using parentheses. However, we can also use a tuple packing to do the same, and unpacking to assign its values to a sequence.</p>
+</li>
+<li><p><strong>元组</strong>: 一个元组就是一系列值的组合，并且使用圆括号声明。然而，我们也可以使用tuple关键字来组装一个元组，也可以把元组拆分成序列。</p>
+</li>
+<li><p><strong>Lists</strong>: Unlike in C++, we don’t have arrays to work with in Python. Here, we have a list instead.</p>
+</li>
+<li><p><strong>列表</strong>: 与C++不同，在Python中没有数组。这里，我们使用list来替代。</p>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="Mutability-可变性"><a href="#Mutability-可变性" class="headerlink" title="Mutability 可变性"></a>Mutability 可变性</h3><ul>
+<li>A List is Mutable list是可变的</li>
+</ul>
+<p>Let’s first see lists. Let’s take a new list for exemplar purposes.</p>
+<p>首先我们先来看下list。创建一个list来用于测试。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>list1=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>]</div></pre></td></tr></table></figure>
+<p>Now first, we’ll try reassigning an element of a list. Let’s reassign the second element to hold the value 3.</p>
+<p>我们尝试给list中的一个元素重新赋值。我们把第二个元素重新赋值为3</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>list1[<span class="number">1</span>]=<span class="number">3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list1</div><div class="line">[<span class="number">0</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>]</div></pre></td></tr></table></figure>
+<p>Again, let’s see how we can reassign the entire list.</p>
+<p>同样地，我们来看下给list整个重新赋值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>list1=[<span class="number">7</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list1</div><div class="line">[<span class="number">7</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>]</div></pre></td></tr></table></figure>
+<p>It worked, great.</p>
+<p>Now, we will delete just one element from the list.</p>
+<p>现在，我们来删除list中的一个元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> list1[<span class="number">1</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list1</div><div class="line">[<span class="number">7</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>]</div></pre></td></tr></table></figure>
+<p>This was easy, but could we delete a slice of the list? Let’s try it.</p>
+<p>这很容易，我们是否能以切片的方式删除list中的元素？试试看。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> list1[<span class="number">3</span>:]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list1</div><div class="line">[<span class="number">7</span>, <span class="number">5</span>, <span class="number">4</span>]</div></pre></td></tr></table></figure>
+<p>We can access a slice the same way. Can we reassign a slice?</p>
+<p>从上可以看出，我们可以通过切片的方式处理list。我们能否以切片的方式赋值呢？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>nums=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>nums[<span class="number">1</span>:<span class="number">3</span>]=[<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>nums</div><div class="line">[<span class="number">1</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">5</span>]</div></pre></td></tr></table></figure>
+<p>Indeed, we can. Finally, let’s try deleting the entire list.</p>
+<p>的确，可以。最后，我们试着删除整个list。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> list1</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list1</div><div class="line">Traceback (most recent call last):</div><div class="line">File <span class="string">"&lt;pyshell#67&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">list1</div><div class="line">NameError: name ‘list1’ <span class="keyword">is</span> <span class="keyword">not</span> defined</div></pre></td></tr></table></figure>
+<p>The list doesn’t exist anymore.</p>
+<p>可以看出，list不再存在。</p>
+<h3 id="A-Tuple-is-Immutable-元组是不可变的"><a href="#A-Tuple-is-Immutable-元组是不可变的" class="headerlink" title="A Tuple is Immutable 元组是不可变的"></a>A Tuple is Immutable 元组是不可变的</h3><p>Now, let’s try doing the same things to a tuple. We know that a tuple is immutable, so some of these operations shouldn’t work. We’ll take a new tuple for this purpose.</p>
+<p>现在，我们尝试在tuple上进行相同的操作。我们知道tuple是不可变的，所以有些操作可能不能工作。首先，我们创建一个tuple来测试。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>mytuple=<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span></div><div class="line">First, let’s <span class="keyword">try</span> reassigning the second element.</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mytuple[<span class="number">1</span>]=<span class="number">3</span></div><div class="line">Traceback (most recent call last):</div><div class="line">File <span class="string">"&lt;pyshell#70&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">mytuple[<span class="number">1</span>]=<span class="number">3</span></div><div class="line">TypeError: ‘tuple’ object does <span class="keyword">not</span> support item assignment</div></pre></td></tr></table></figure>
+<p>As you can see, a tuple doesn’t support item assignment.</p>
+<p>可以看到，tuple不支持元素的重新赋值。</p>
+<p>However, we can reassign an entire tuple.</p>
+<p>但是，我们可以给整个tuple重新赋值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>mytuple=<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mytuple</div><div class="line">(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</div></pre></td></tr></table></figure>
+<p>Next, let’s try slicing a tuple to access or delete it.</p>
+<p>下面，我们来尝试切片访问和删除。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>mytuple[<span class="number">3</span>:]</div><div class="line">(<span class="number">5</span>, <span class="number">6</span>)</div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> mytuple[<span class="number">3</span>:]</div><div class="line">Traceback (most recent call last):</div><div class="line">File <span class="string">"&lt;pyshell#74&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line"><span class="keyword">del</span> mytuple[<span class="number">3</span>:]</div><div class="line">TypeError: ‘tuple’ object does <span class="keyword">not</span> support item deletion</div></pre></td></tr></table></figure>
+<p>As is visible, we can slice it to access it, but we can’t delete a slice. This is because it is immutable.</p>
+<p>我们可以以切片的方式访问tuple，但是我们不能以这种方式删除。这是因为tuple是不可变的。</p>
+<p>Can we delete a single element?</p>
+<p>我们可以删除单个元素吗？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> mytuple[<span class="number">3</span>]</div><div class="line">Traceback (most recent call last):</div><div class="line">File <span class="string">"&lt;pyshell#75&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line"><span class="keyword">del</span> mytuple[<span class="number">3</span>]</div><div class="line">TypeError: ‘tuple’ object doesn’t support item deletion</div></pre></td></tr></table></figure>
+<p>Apparently, the answer is no.</p>
+<p>很显然，答案是不可以。</p>
+<p>Finally, let’s try deleting the entire tuple.</p>
+<p>最后，我们尝试删除整个tuple。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">del</span> mytuple</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>mytuple</div><div class="line">Traceback (most recent call last):</div><div class="line">File <span class="string">"&lt;pyshell#77&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">mytuple</div><div class="line">NameError: name ‘mytuple’ <span class="keyword">is</span> <span class="keyword">not</span> defined</div></pre></td></tr></table></figure>
+<p>So, here, we conclude that you can slice a tuple, reassign it whole, or delete it whole. But you cannot delete or reassign just a few elements or a slice.</p>
+<p>这里，我们可以总结出，tuple可以以切片的方式访问，重新赋值或删除整个tuple。但是，不能删除或重新赋值tuple中一个或多个元素。</p>
+<p>Let us proceed with more differences between python tuples vs lists.</p>
+<p>我们再来多看下python中lists和tuples的不同之处。</p>
+<h3 id="Functions-函数"><a href="#Functions-函数" class="headerlink" title="Functions 函数"></a>Functions 函数</h3><p>Some python functions apply on both, these are- len(), max(), min(), sum(), any(), all(), sorted(). We’ll take just one example here for both containers.</p>
+<p>python中的某些函数在两者都能使用，len(), max(), min(), sum(), any(), all(), sorted().我们这里只拿一个来举例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>max((<span class="number">1</span>,<span class="number">3</span>,<span class="number">-1</span>))</div><div class="line"><span class="number">3</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>max([<span class="number">1</span>,<span class="number">3</span>,<span class="number">-1</span>])</div><div class="line"><span class="number">3</span></div></pre></td></tr></table></figure>
+<h3 id="Methods-方法"><a href="#Methods-方法" class="headerlink" title="Methods 方法"></a>Methods 方法</h3><p>Lists and tuples share the index() and count() methods. But other than those, there are a few methods that apply to lists. These are- append(), insert(), remove(), pop(), clear(), sort(), and reverse(). Let’s take an example of one of these.</p>
+<p>lists和tuples共同的方法有index()和count()。lists有几个特有的方法，append(), insert(), remove(), pop(), clear(), sort(), and reverse()。我们拿一个来示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>].index(<span class="number">3</span>)</div><div class="line"><span class="number">1</span></div><div class="line"></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>).index(<span class="number">3</span>)</div><div class="line"><span class="number">1</span></div></pre></td></tr></table></figure>
+<h3 id="Tuples-in-a-List"><a href="#Tuples-in-a-List" class="headerlink" title="Tuples in a List"></a>Tuples in a List</h3><p>We can store tuples in a list when we want to.</p>
+<p>我们可以在list中存储tuples</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; mylist=[(1,2,3),(4,5,6)]</div><div class="line">&gt;&gt;&gt; type(mylist)</div><div class="line">&lt;class 'list'&gt;</div><div class="line">&gt;&gt;&gt; type(mylist[1])</div><div class="line">&lt;class ‘tuple’&gt;</div></pre></td></tr></table></figure>
+<p>But when would we need to do this? Take an example.</p>
+<p>但是，在什么时候我们需要这样做呢？看一个示例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>list(students)</div><div class="line">[(<span class="number">1</span>, ‘ABC’), (<span class="number">2</span>, ‘DEF’), (<span class="number">3</span>, ‘GHI’)]</div></pre></td></tr></table></figure>
+<h3 id="Lists-in-a-Tuple"><a href="#Lists-in-a-Tuple" class="headerlink" title="Lists in a Tuple"></a>Lists in a Tuple</h3><p>Likewise, we can also use a tuple to store lists. Let’s see how.</p>
+<p>像前面一样，我们也可以在tuple中存储lists，示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>mytuple=([<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>])</div></pre></td></tr></table></figure>
+<h3 id="Nested-Tuples"><a href="#Nested-Tuples" class="headerlink" title="Nested Tuples"></a>Nested Tuples</h3><p>A tuple may hold more tuples, and this can go on in more than two dimensions.</p>
+<p>一个tuple中可以嵌套多个tuples，而且这个不止是二维：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>mytuple=((<span class="number">1</span>,<span class="number">2</span>),(<span class="number">3</span>,(<span class="number">4</span>,<span class="number">5</span>),(<span class="number">6</span>,(<span class="number">7</span>,(<span class="number">8</span>,<span class="number">9</span>)))))</div></pre></td></tr></table></figure>
+<p>To access the element with the value 8, we write the following code.</p>
+<p>我们使用下面的代码来访问元素8</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>mytuple[<span class="number">1</span>][<span class="number">2</span>][<span class="number">1</span>][<span class="number">1</span>][<span class="number">0</span>]</div><div class="line"><span class="number">8</span></div></pre></td></tr></table></figure>
+<h3 id="Nested-Lists"><a href="#Nested-Lists" class="headerlink" title="Nested Lists"></a>Nested Lists</h3><p>Similarly, a list may hold more lists, in as many dimensions as you want.</p>
+<p>同样地，list可以嵌套多个lists：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>mylist=[[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>myotherlist=[[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,[<span class="number">4</span>,<span class="number">5</span>]]]</div></pre></td></tr></table></figure>
+<p>To access the element with the value 5, we write the following code.</p>
+<p>可以使用下面的代码来访问元素5</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>myotherlist[<span class="number">1</span>][<span class="number">1</span>][<span class="number">1</span>]</div><div class="line"><span class="number">5</span></div></pre></td></tr></table></figure>
+<h3 id="When-to-Use-Which-怎么选择？"><a href="#When-to-Use-Which-怎么选择？" class="headerlink" title="When to Use Which? 怎么选择？"></a>When to Use Which? 怎么选择？</h3><p>Use a tuple when you know what information goes in the container that it is. For example, when you want to store a person’s credentials for your website.</p>
+<p>当你确切知道集合中要存储的内容时，使用tuple。例如，当你存储个人网站的信息时：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>person=(<span class="string">'ABC'</span>,<span class="string">'admin'</span>,<span class="string">'12345'</span>)</div></pre></td></tr></table></figure>
+<p>But when you want to store similar elements, like in an array in C++, you should use a list.</p>
+<p>但是，你想要在C++中一样使用数组来存储差不多的信息时，你应该使用list。也就是说，list不能确保是否需要添加其他元素时</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>groceries=[<span class="string">'bread'</span>,<span class="string">'butter'</span>,<span class="string">'cheese'</span>]</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/04/python-022-python-join/" rel="next" title="Python join函数">
+                <i class="fa fa-chevron-left"></i> Python join函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/05/python-024-python-set/" rel="prev" title="Python中set">
+                Python中set <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Viking Den</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("uyYEuRKVstiSUSuSLjwTogzr-gzGzoHsz", "E1WrYee4gjwbKuLDKSkzx2rX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

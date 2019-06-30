@@ -1,0 +1,773 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Viking Den Personal Website" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="翻译自：Python’s range() Function (Guide)
+Python中的内建方法 range 在需要执行特定的多次行为时非常方便。
+range()的历史虽然，在Python 3 和Python 2中使用了同一个 range() 名称，但是它们是完全不一样的。事实上，Python 3中的 range() 方法是Python 2中的 xrange() 的重命名而已。
+起先，rang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python range()方法使用介绍">
+<meta property="og:url" content="http://vikingden.cn/2018/10/20/python-034-python-range/index.html">
+<meta property="og:site_name" content="Viking's Website">
+<meta property="og:description" content="翻译自：Python’s range() Function (Guide)
+Python中的内建方法 range 在需要执行特定的多次行为时非常方便。
+range()的历史虽然，在Python 3 和Python 2中使用了同一个 range() 名称，但是它们是完全不一样的。事实上，Python 3中的 range() 方法是Python 2中的 xrange() 的重命名而已。
+起先，rang">
+<meta property="og:updated_time" content="2019-06-30T14:05:41.350Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python range()方法使用介绍">
+<meta name="twitter:description" content="翻译自：Python’s range() Function (Guide)
+Python中的内建方法 range 在需要执行特定的多次行为时非常方便。
+range()的历史虽然，在Python 3 和Python 2中使用了同一个 range() 名称，但是它们是完全不一样的。事实上，Python 3中的 range() 方法是Python 2中的 xrange() 的重命名而已。
+起先，rang">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"remove"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vikingden.cn/2018/10/20/python-034-python-range/"/>
+
+
+
+
+
+  <title> Python range()方法使用介绍 | Viking's Website </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Viking's Website</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Notes, thoughts, stories.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://vikingden.cn/2018/10/20/python-034-python-range/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Viking Den">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/16629000?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Viking's Website">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Viking's Website" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python range()方法使用介绍
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-20T08:13:08+08:00">
+                2018-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/10/20/python-034-python-range/" class="leancloud_visitors" data-flag-title="Python range()方法使用介绍">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>翻译自：<a href="https://realpython.com/python-range/" target="_blank" rel="external">Python’s range() Function (Guide)</a></p>
+<p>Python中的内建方法 range 在需要执行特定的多次行为时非常方便。</p>
+<h3 id="range-的历史"><a href="#range-的历史" class="headerlink" title="range()的历史"></a>range()的历史</h3><p>虽然，在Python 3 和Python 2中使用了同一个 range() 名称，但是它们是完全不一样的。事实上，Python 3中的 range() 方法是Python 2中的 xrange() 的重命名而已。</p>
+<p>起先，range() 和 xrange() 都是生成数字供 for 循环迭代使用，但是前者是即时地生成所有的数字集合，而后者则是以懒惰的方式生成数字，也就是说在需要的时候只返回生成一个数字。</p>
+<p>当即时地生成大的数字集合时会占用大的内存，所以，在Python 3的版本中使用 xrange() 来替代 range() 一点也不惊奇。你可以通过阅读这个<a href="https://www.python.org/dev/peps/pep-3100" target="_blank" rel="external">PEP 3100</a>来了解更多的 xrang() 和 range() 背景。</p>
+<a id="more"></a>
+<p>文中下述提到的 range() 都是在Python 3的环境。</p>
+<h3 id="使用循环"><a href="#使用循环" class="headerlink" title="使用循环"></a>使用循环</h3><p>在我们深入了解 range() 工作原理之前，需要了解下循环是如何工作的。循环是计算机科学的重要概念。如果你想要成为好的程序员，那么掌握循环将是你首先要做的事情。</p>
+<p>下面是Python中的for循环示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">captains = [<span class="string">'Janeway'</span>, <span class="string">'Picard'</span>, <span class="string">'Sisko'</span>]</div><div class="line"></div><div class="line"><span class="keyword">for</span> captain <span class="keyword">in</span> captains:</div><div class="line">    print(captain)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Janeway</div><div class="line">Picard</div><div class="line">Sisko</div></pre></td></tr></table></figure>
+<p>如你所见，一个循环能让你执行特定的代码多次。在这个示例中，我们循环一首都的集合，并依次打印出它们的名字。</p>
+<p>有时候，你可能只需要执行特定的代码段给定的特定次数，尝试下面的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">numbers_divisible_by_three = [<span class="number">3</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">12</span>, <span class="number">15</span>]</div><div class="line"></div><div class="line"><span class="keyword">for</span> num <span class="keyword">in</span> numbers_divisible_by_three:</div><div class="line">    quotient = num / <span class="number">3</span></div><div class="line">    print(<span class="string">"&#123;&#125; divided by 3 is &#123;&#125;."</span>.format(num, int(quotient)))</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">3</span> divided by <span class="number">3</span> <span class="keyword">is</span> <span class="number">1.</span></div><div class="line"><span class="number">6</span> divided by <span class="number">3</span> <span class="keyword">is</span> <span class="number">2.</span></div><div class="line"><span class="number">9</span> divided by <span class="number">3</span> <span class="keyword">is</span> <span class="number">3.</span></div><div class="line"><span class="number">12</span> divided by <span class="number">3</span> <span class="keyword">is</span> <span class="number">4.</span></div><div class="line"><span class="number">15</span> divided by <span class="number">3</span> <span class="keyword">is</span> <span class="number">5.</span></div></pre></td></tr></table></figure>
+<p>得到了我们想要地输出，所以循环能完成需求，但是，还有一种方法，也就是使用 range() 也能得到同样地结果。</p>
+<p>现在你已经熟悉了循环的使用，下面我们来看下使用 range() 方法来简便我们的日常。</p>
+<h4 id="开始使用-range"><a href="#开始使用-range" class="headerlink" title="开始使用 range()"></a>开始使用 range()</h4><p>究竟Python中的 range 方法是如何工作的呢？简单来说，range() 允许你在给定的范围内生成一系列的数字。具体取决于你给这个方法传入的参数个数，你可以决定这个数字集合的开始和结束，以及数字和数字之间的间隔大小。</p>
+<p>看下下面的示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>, <span class="number">16</span>, <span class="number">3</span>):</div><div class="line">    quotient = i / <span class="number">3</span></div><div class="line">    print(<span class="string">"&#123;&#125; divided by 3 is &#123;&#125;."</span>.format(i, int(quotient)))</div></pre></td></tr></table></figure>
+<p>在这个循环中，你能简单的创建一系列能被3整除的数字，所以你没必要自己提供。</p>
+<p>有以下的三种方式来调用 range():</p>
+<ul>
+<li><p>使用一个参数的 range(stop)</p>
+</li>
+<li><p>使用两个参数的 range(start, stop)</p>
+</li>
+<li><p>使用三个参数的 range(start, stop, step)</p>
+</li>
+</ul>
+<h4 id="range-stop"><a href="#range-stop" class="headerlink" title="range(stop)"></a>range(stop)</h4><p>当你调用 range(stop) 的时候只传了一个参数，那么你将会得到一系列以0开始，一直到 stop ，但不包括 stop 的数字集合。</p>
+<p>在实际中如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>):</div><div class="line">    print(i)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">0</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">2</span></div></pre></td></tr></table></figure>
+<p>得到的结果：返回了0到2的数字集合，但是不包括3。</p>
+<h4 id="range-start-stop"><a href="#range-start-stop" class="headerlink" title="range(start, stop)"></a>range(start, stop)</h4><p>当你在调用 range(start, stop) 时给定了两个参数，那么你返回的数字集合决定了从 start 开始到 stop 结束，也就是某种情况下你并不是所有的数字集合都是从0开始。下面我们来实践下如何生成从1开始的数字集合。</p>
+<p>尝试在调用 range() 时使用两个参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">8</span>):</div><div class="line">    print(i)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="number">4</span></div><div class="line"><span class="number">5</span></div><div class="line"><span class="number">6</span></div><div class="line"><span class="number">7</span></div></pre></td></tr></table></figure>
+<p>从上可看出，返回了从1开始到7的数字，但是不包括给定的结束点8。</p>
+<h4 id="range-start-stop-step"><a href="#range-start-stop-step" class="headerlink" title="range(start, stop, step)"></a>range(start, stop, step)</h4><p>当你调用 range() 时传了三个参数，那么决定了返回的数字集合的开始和结束，同时也指定了两个相近数字间的间隔大小。如果你没有指定 step ，那么默认的 range() 方法会设置 step 为1。</p>
+<p>step 可正可负，但是不可以为0：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>range(<span class="number">1</span>, <span class="number">4</span>, <span class="number">0</span>)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">ValueError: range() arg <span class="number">3</span> must <span class="keyword">not</span> be zero</div></pre></td></tr></table></figure>
+<p>如果你尝试给 step 指定为0，那么你将得到上述的错误。</p>
+<h3 id="递增的-range"><a href="#递增的-range" class="headerlink" title="递增的 range()"></a>递增的 range()</h3><p>如果你想要递增的数字集合，那么 range() 中的 step 必须为正整数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>, <span class="number">100</span>, <span class="number">25</span>):</div><div class="line">    print(i)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="number">3</span></div><div class="line"><span class="number">28</span></div><div class="line"><span class="number">53</span></div><div class="line"><span class="number">78</span></div></pre></td></tr></table></figure>
+<h4 id="递减的-range"><a href="#递减的-range" class="headerlink" title="递减的 range()"></a>递减的 range()</h4><p>如果 range() 方法中 step 指定为负整数，那么返回的数字集合将是递减的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>, <span class="number">-6</span>, <span class="number">-2</span>):</div><div class="line">    print(i)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="number">10</span></div><div class="line"><span class="number">8</span></div><div class="line"><span class="number">6</span></div><div class="line"><span class="number">4</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">0</span></div><div class="line"><span class="number">-2</span></div><div class="line"><span class="number">-4</span></div></pre></td></tr></table></figure>
+<p>在Python中创建递减的数字集合就是使用range(start, stop, step)。但是Python有一个内建函数 reversed。如果你的 range() 被 reversed() 包裹使用，则得到的整数是反序的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> reversed(range(<span class="number">5</span>)):</div><div class="line">    print(i)</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">4</span></div><div class="line"><span class="number">3</span></div><div class="line"><span class="number">2</span></div><div class="line"><span class="number">1</span></div><div class="line"><span class="number">0</span></div></pre></td></tr></table></figure>
+<h3 id="深入了解-range"><a href="#深入了解-range" class="headerlink" title="深入了解 range()"></a>深入了解 range()</h3><p>现在你了解了怎样使用 range()， 现在是时候再深入了解了。</p>
+<p>range() 主要有两种使用目的：</p>
+<ul>
+<li><p>执行循环中的代码块多次</p>
+</li>
+<li><p>创建比集合或元组更高效地的可迭代数字集合</p>
+</li>
+</ul>
+<p>在Python中，range() 是一种类型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>type(range(<span class="number">3</span>))</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">range</span>'&gt;</span></div></pre></td></tr></table></figure>
+<p>你可以通过索引的方式访问，就像访问集合一样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>range(<span class="number">3</span>)[<span class="number">1</span>]</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>range(<span class="number">3</span>)[<span class="number">2</span>]</div><div class="line"><span class="number">2</span></div></pre></td></tr></table></figure>
+<p>甚至你可以使用切片，但是得到就是一个 REPL ：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>range(<span class="number">6</span>)[<span class="number">2</span>:<span class="number">5</span>]</div><div class="line">range(<span class="number">2</span>, <span class="number">5</span>)</div></pre></td></tr></table></figure>
+<p>虽然返回看起来有点奇怪，但是 range() 的切片操作仅仅是返回另一个 range() 对象。</p>
+<h3 id="Floats-和-range"><a href="#Floats-和-range" class="headerlink" title="Floats 和 range()"></a>Floats 和 range()</h3><p>你或许已注意到我们上述的示例中都是使用的整数，包括参数以及返回的数字集合。这是因为 range() 方法的参数必须是整数。</p>
+<p>在Python中，如果一个数字不是整数，那么就是浮点型。</p>
+<p>下面尝试下在 range() 方法中使用 float，看会发生什么：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3.3</span>):</div><div class="line">    print(i)</div></pre></td></tr></table></figure>
+<p>应当会得到如下的错误信息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">TypeError: <span class="string">'float'</span> object cannot be interpreted <span class="keyword">as</span> an integer</div></pre></td></tr></table></figure>
+<p>如果你确实需要使用 float 的集合，那么你可以使用 NumPy。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line">np.arange(<span class="number">0.3</span>, <span class="number">1.6</span>, <span class="number">0.3</span>)</div></pre></td></tr></table></figure>
+<p>返回：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array([<span class="number">0.3</span>, <span class="number">0.6</span>, <span class="number">0.9</span>, <span class="number">1.2</span>, <span class="number">1.5</span>])</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/15/python-033-primer-on-python-decorators/" rel="next" title="Python装饰器入门">
+                <i class="fa fa-chevron-left"></i> Python装饰器入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/03/python-035-absolute-vs-relative-python-imports/" rel="prev" title="Python中的绝对和相对导入">
+                Python中的绝对和相对导入 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Viking Den</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("uyYEuRKVstiSUSuSLjwTogzr-gzGzoHsz", "E1WrYee4gjwbKuLDKSkzx2rX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

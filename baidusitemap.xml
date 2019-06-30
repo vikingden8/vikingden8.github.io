@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://vikingden.cn/2019/06/30/javascript-var-let-const/</loc>
+    <lastmod>2019-06-30T14:56:49.483Z</lastmod>
+    <data>
+        <display>
+        <title>JavaScript中的var，let和const</title>
+        <pubTime>2019-06-30T14:15:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="JavaScript学习笔记" url="http://vikingden.cn/categories/JavaScript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+  <url>
+    <loc>http://vikingden.cn/2018/11/03/python-035-absolute-vs-relative-python-imports/</loc>
+    <lastmod>2019-06-30T14:05:41.350Z</lastmod>
+    <data>
+        <display>
+        <title>Python中的绝对和相对导入</title>
+        <pubTime>2018-11-03T05:48:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/10/20/python-034-python-range/</loc>
+    <lastmod>2019-06-30T14:05:41.350Z</lastmod>
+    <data>
+        <display>
+        <title>Python range()方法使用介绍</title>
+        <pubTime>2018-10-20T00:13:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/09/15/python-033-primer-on-python-decorators/</loc>
+    <lastmod>2019-06-30T14:05:41.349Z</lastmod>
+    <data>
+        <display>
+        <title>Python装饰器入门</title>
+        <pubTime>2018-09-15T08:40:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/09/01/python-032-operator-function-overloading/</loc>
+    <lastmod>2019-06-30T14:05:41.348Z</lastmod>
+    <data>
+        <display>
+        <title>Python中的操作符重载</title>
+        <pubTime>2018-09-01T02:40:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/07/30/python-031-python-dict-get-default-value/</loc>
+    <lastmod>2019-06-30T14:05:41.347Z</lastmod>
+    <data>
+        <display>
+        <title>使用Python字典中的get方法返回默认值</title>
+        <pubTime>2018-07-30T11:44:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/07/07/python-029-python-instance-class-static-methods/</loc>
+    <lastmod>2019-06-30T14:05:41.346Z</lastmod>
+    <data>
+        <display>
+        <title>Python's Instance, Class and Static Methods</title>
+        <pubTime>2018-07-07T03:01:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/07/12/python-030-python-itertor/</loc>
+    <lastmod>2019-06-30T14:05:41.346Z</lastmod>
+    <data>
+        <display>
+        <title>Python中的for工作原理</title>
+        <pubTime>2018-07-12T11:12:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/04/11/python-028-python-enum/</loc>
+    <lastmod>2019-06-30T14:05:41.345Z</lastmod>
+    <data>
+        <display>
+        <title>Python 中的枚举类型</title>
+        <pubTime>2018-04-11T11:01:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/04/08/python-027-python-global-vs-return/</loc>
+    <lastmod>2019-06-30T14:05:41.345Z</lastmod>
+    <data>
+        <display>
+        <title>Python Global vs Return</title>
+        <pubTime>2018-04-08T13:41:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/04/07/python-026-python-string-format/</loc>
+    <lastmod>2019-06-30T14:05:41.342Z</lastmod>
+    <data>
+        <display>
+        <title>Python使用{}和format的字符串格式化</title>
+        <pubTime>2018-04-07T12:47:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/04/05/python-024-python-set/</loc>
+    <lastmod>2019-06-30T14:05:41.341Z</lastmod>
+    <data>
+        <display>
+        <title>Python中set</title>
+        <pubTime>2018-04-05T02:24:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/04/07/python-025-python-percentage-sign/</loc>
+    <lastmod>2019-06-30T14:05:41.341Z</lastmod>
+    <data>
+        <display>
+        <title>Python中字符串格式化之%</title>
+        <pubTime>2018-04-07T06:55:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/04/04/python-022-python-join/</loc>
+    <lastmod>2019-06-30T14:05:41.340Z</lastmod>
+    <data>
+        <display>
+        <title>Python join函数</title>
+        <pubTime>2018-04-04T15:45:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/04/05/python-023-what-are-the-differences-between-tuples-and-lists-in-python/</loc>
+    <lastmod>2019-06-30T14:05:41.340Z</lastmod>
+    <data>
+        <display>
+        <title>What are the differences between tuples and lists in Python?</title>
+        <pubTime>2018-04-05T00:45:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/04/01/python-021-Python-Interables-Iterators-Generators/</loc>
+    <lastmod>2019-06-30T14:05:41.339Z</lastmod>
+    <data>
+        <display>
+        <title>Python中的可迭代对象，迭代器，生成器(Iterables vs. Iterators vs. Generators)</title>
+        <pubTime>2018-04-01T02:45:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/04/01/python-020-python-confuse-in-integer-comparsion/</loc>
+    <lastmod>2019-06-30T14:05:41.339Z</lastmod>
+    <data>
+        <display>
+        <title>Python解惑-整数比较</title>
+        <pubTime>2018-04-01T02:25:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/03/31/python-019-python-tail-recurision/</loc>
+    <lastmod>2019-06-30T14:05:41.338Z</lastmod>
+    <data>
+        <display>
+        <title>Python中的尾递归</title>
+        <pubTime>2018-03-31T11:25:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/03/29/python-018-python-thread/</loc>
+    <lastmod>2019-06-30T14:05:41.338Z</lastmod>
+    <data>
+        <display>
+        <title>Python中的线程</title>
+        <pubTime>2018-03-29T11:25:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/03/26/python-017-how-python3-handle-charset-encoding/</loc>
+    <lastmod>2019-06-30T14:05:41.337Z</lastmod>
+    <data>
+        <display>
+        <title>Python3是如何解决棘手的字符编码问题的？</title>
+        <pubTime>2018-03-26T12:10:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/03/26/python-016-why-python-encode-is-so-tricky/</loc>
+    <lastmod>2019-06-30T14:05:41.337Z</lastmod>
+    <data>
+        <display>
+        <title>Python 编码为什么那么蛋疼？</title>
+        <pubTime>2018-03-26T11:54:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/03/26/python-015-transform-between-bytes-and-hex-in-python/</loc>
+    <lastmod>2019-06-30T14:05:41.336Z</lastmod>
+    <data>
+        <display>
+        <title>Python中bytes和hex之间的转换</title>
+        <pubTime>2018-03-26T11:38:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/03/20/python-014-meaning-of-classmethod-and-staticmethod-for-beginner/</loc>
+    <lastmod>2019-06-30T14:05:41.335Z</lastmod>
+    <data>
+        <display>
+        <title>Meaning of classmethod and staticmethod for beginner</title>
+        <pubTime>2018-03-20T12:08:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/01/23/python-013-difference-between-is-and-equals-in-python/</loc>
+    <lastmod>2019-06-30T14:05:41.334Z</lastmod>
+    <data>
+        <display>
+        <title>The Difference Between “is” and “==” in Python</title>
+        <pubTime>2018-01-23T03:15:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/04/15/python-012-setting-python-2-6-as-default-on-linux/</loc>
+    <lastmod>2019-06-30T14:05:41.333Z</lastmod>
+    <data>
+        <display>
+        <title>Setting python 2.6 as default on Linux</title>
+        <pubTime>2017-04-15T14:37:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/04/15/python-011-python-type-and-isinstance/</loc>
+    <lastmod>2019-06-30T14:05:41.332Z</lastmod>
+    <data>
+        <display>
+        <title>python判断变量类型时，为什么不推荐使用type()方法</title>
+        <pubTime>2017-04-15T14:37:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/04/13/python-010-python-object/</loc>
+    <lastmod>2019-06-30T14:05:41.331Z</lastmod>
+    <data>
+        <display>
+        <title>Python对象</title>
+        <pubTime>2017-04-13T14:55:33.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/04/13/python-009-python-reference-count/</loc>
+    <lastmod>2019-06-30T14:05:41.331Z</lastmod>
+    <data>
+        <display>
+        <title>Python引用计数</title>
+        <pubTime>2017-04-13T13:45:16.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/03/19/python-008-What-is-main-for/</loc>
+    <lastmod>2019-06-30T14:05:41.330Z</lastmod>
+    <data>
+        <display>
+        <title>What is 'if __name__ == "__main__"' for?</title>
+        <pubTime>2017-03-19T15:41:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/03/19/python-007-python-underline/</loc>
+    <lastmod>2019-06-30T14:05:41.330Z</lastmod>
+    <data>
+        <display>
+        <title>详解Python下划线</title>
+        <pubTime>2017-03-19T15:08:26.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/03/19/python-006-python-variable-assignment/</loc>
+    <lastmod>2019-06-30T14:05:41.329Z</lastmod>
+    <data>
+        <display>
+        <title>Python变量赋值</title>
+        <pubTime>2017-03-19T14:15:20.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/03/18/python-005-python-indent-tab-verus-space/</loc>
+    <lastmod>2019-06-30T14:05:41.329Z</lastmod>
+    <data>
+        <display>
+        <title>Python indentation:Tab or Space?</title>
+        <pubTime>2017-03-18T14:19:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/03/09/python-003-python-comment/</loc>
+    <lastmod>2019-06-30T14:05:41.328Z</lastmod>
+    <data>
+        <display>
+        <title>Python注释</title>
+        <pubTime>2017-03-09T11:59:04.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/03/18/python-004-python-back-slant/</loc>
+    <lastmod>2019-06-30T14:05:41.328Z</lastmod>
+    <data>
+        <display>
+        <title>Python中的反斜杠</title>
+        <pubTime>2017-03-18T13:45:05.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/03/02/python-002-code-should-written-like-this/</loc>
+    <lastmod>2019-06-30T14:05:41.327Z</lastmod>
+    <data>
+        <display>
+        <title>代码这样写更优雅 (Python 版)</title>
+        <pubTime>2017-03-02T01:22:11.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/01/08/python-001-python-file-type/</loc>
+    <lastmod>2019-06-30T14:05:41.326Z</lastmod>
+    <data>
+        <display>
+        <title>Python的文件类型</title>
+        <pubTime>2017-01-08T01:36:11.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/11/30/ai-006-what-is-machine-learning/</loc>
+    <lastmod>2019-06-30T14:05:41.326Z</lastmod>
+    <data>
+        <display>
+        <title>What is Machine Learning</title>
+        <pubTime>2017-11-30T13:12:45.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="人工智能" url="http://vikingden.cn/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/08/24/ai-004-what-is-deep-learning/</loc>
+    <lastmod>2019-06-30T14:05:41.325Z</lastmod>
+    <data>
+        <display>
+        <title>What is Deep Learning? Getting Started With Deep Learning</title>
+        <pubTime>2017-08-24T01:42:21.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="人工智能" url="http://vikingden.cn/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/08/24/ai-005-artificial-intelligence-machine-learning-and-deep-learning/</loc>
+    <lastmod>2019-06-30T14:05:41.325Z</lastmod>
+    <data>
+        <display>
+        <title>What is Artificial Intelligence, Machine Learning and Deep Learning</title>
+        <pubTime>2017-08-24T02:12:45.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="人工智能" url="http://vikingden.cn/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/05/04/ai-002-why-should-you-care-about-machine-learning/</loc>
+    <lastmod>2019-06-30T14:05:41.324Z</lastmod>
+    <data>
+        <display>
+        <title>你为什么要关注机器学习？</title>
+        <pubTime>2017-05-04T01:20:14.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="人工智能" url="http://vikingden.cn/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/08/23/ai-003-whats-difference-artificial-intelligence-machine-learning-deep-learning-ai/</loc>
+    <lastmod>2019-06-30T14:05:41.324Z</lastmod>
+    <data>
+        <display>
+        <title>What’s the Difference Between Artificial Intelligence, Machine Learning, and Deep Learning?</title>
+        <pubTime>2017-08-23T15:36:26.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="人工智能" url="http://vikingden.cn/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2017/05/04/ai-001-how-to-get-started-as-a-developer-in-ai/</loc>
+    <lastmod>2019-06-30T14:05:41.322Z</lastmod>
+    <data>
+        <display>
+        <title>人工智能领域简介</title>
+        <pubTime>2017-05-04T01:09:35.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="人工智能" url="http://vikingden.cn/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>

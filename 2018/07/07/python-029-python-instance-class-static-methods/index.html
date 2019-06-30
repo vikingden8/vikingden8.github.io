@@ -1,0 +1,725 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Viking Den Personal Website" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这篇文章主要介绍Python的实例方法（Instance Methods），类方法（Class Methods）以及静态方法（Static Methods）。掌握和理解三者的用法以及区别，对编写面向对象的程序很有帮助。
+三种方法的简介首先在 MyClass 中分别创建这三个方法：
+1234567891011class MyClass:    def method(self):        ret">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python's Instance, Class and Static Methods">
+<meta property="og:url" content="http://vikingden.cn/2018/07/07/python-029-python-instance-class-static-methods/index.html">
+<meta property="og:site_name" content="Viking's Website">
+<meta property="og:description" content="这篇文章主要介绍Python的实例方法（Instance Methods），类方法（Class Methods）以及静态方法（Static Methods）。掌握和理解三者的用法以及区别，对编写面向对象的程序很有帮助。
+三种方法的简介首先在 MyClass 中分别创建这三个方法：
+1234567891011class MyClass:    def method(self):        ret">
+<meta property="og:updated_time" content="2019-06-30T14:05:41.346Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python's Instance, Class and Static Methods">
+<meta name="twitter:description" content="这篇文章主要介绍Python的实例方法（Instance Methods），类方法（Class Methods）以及静态方法（Static Methods）。掌握和理解三者的用法以及区别，对编写面向对象的程序很有帮助。
+三种方法的简介首先在 MyClass 中分别创建这三个方法：
+1234567891011class MyClass:    def method(self):        ret">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"remove"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vikingden.cn/2018/07/07/python-029-python-instance-class-static-methods/"/>
+
+
+
+
+
+  <title> Python's Instance, Class and Static Methods | Viking's Website </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Viking's Website</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Notes, thoughts, stories.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://vikingden.cn/2018/07/07/python-029-python-instance-class-static-methods/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Viking Den">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/16629000?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Viking's Website">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Viking's Website" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python's Instance, Class and Static Methods
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-07T11:01:08+08:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/07/07/python-029-python-instance-class-static-methods/" class="leancloud_visitors" data-flag-title="Python's Instance, Class and Static Methods">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇文章主要介绍Python的实例方法（Instance Methods），类方法（Class Methods）以及静态方法（Static Methods）。掌握和理解三者的用法以及区别，对编写面向对象的程序很有帮助。</p>
+<h3 id="三种方法的简介"><a href="#三种方法的简介" class="headerlink" title="三种方法的简介"></a>三种方法的简介</h3><p>首先在 MyClass 中分别创建这三个方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">method</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">'instance method called'</span>, self</div><div class="line"></div><div class="line"><span class="meta">    @classmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">classmethod</span><span class="params">(cls)</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">'class method called'</span>, cls</div><div class="line"></div><div class="line"><span class="meta">    @staticmethod</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">staticmethod</span><span class="params">()</span>:</span></div><div class="line">        <span class="keyword">return</span> <span class="string">'static method called'</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="实例方法（Instance-Methods）"><a href="#实例方法（Instance-Methods）" class="headerlink" title="实例方法（Instance Methods）"></a>实例方法（Instance Methods）</h4><p>MyClass中的第一方法 method() 是一个普通的实例方法。这是最基本的方法，很多的时候都会使用它。这个方法的第一个参数是 self，也就是当调用这个方法时的那个实例对象。</p>
+<p>因为有参数 self ，实例方法能直接访问这个实例的所有属性和方法，所以能修改这个对象实例的状态。另外，通过 self.<strong>class</strong> 属性能访问类自己，所以实例方法也可以修改类的状态，</p>
+<h4 id="类方法（Class-Methods）"><a href="#类方法（Class-Methods）" class="headerlink" title="类方法（Class Methods）"></a>类方法（Class Methods）</h4><p>来看以下 MyClass.classmethod() ，这里使用了装饰器 @classmethod 来标记此方法是一个类方法。</p>
+<p>与实例方法不同的是，方法的第一个参数使用的是 cls ，而不是 self。也意味着，在调用这个方法时，是使用的类而不是实例对象。</p>
+<p>因为类方法只能访问类 cls 参数，它不能修改实例的状态。</p>
+<h4 id="静态方法（Static-Methods）"><a href="#静态方法（Static-Methods）" class="headerlink" title="静态方法（Static Methods）"></a>静态方法（Static Methods）</h4><p>第三个方法 MyClass.staticmethod() 使用装饰器 staticmethod 来标记此方法是一个静态方法。</p>
+<p>这个方法的参数既不带 self 也不带 cls，但是，可以带其他自定义的参数。所以静态方法既不能修改对象实例和类状态。</p>
+<h3 id="三者区别"><a href="#三者区别" class="headerlink" title="三者区别"></a>三者区别</h3><p>下面来看下这三个方法分别怎么调用以及调用后的行为。</p>
+<p>调用实例方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># instance method</span></div><div class="line"></div><div class="line">myclass = MyClass()</div><div class="line">print(myclass.method())</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">viking@ubuntu:~/python/methods$ python methods.py </div><div class="line">(<span class="string">'instance method called'</span>, &lt;__main__.MyClass object at 0x7f5fd28d1198&gt;)</div><div class="line">viking@ubuntu:~/python/methods$</div></pre></td></tr></table></figure>
+<p>通过上面的输出可以看出，通过实例对象访问了 method() 方法，Python在调用 method() 方法时，会把 self 替换为 调用此方法的实例对象。obj.method() 其实只是Python提供的语法糖，也就是方便使用，其实等效于下面的方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># no sugar sytax</span></div><div class="line"></div><div class="line">print(MyClass.method(myclass))</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">viking@ubuntu:~/python/methods$ python methods.py </div><div class="line">(<span class="string">'instance method called'</span>, &lt;__main__.MyClass object at 0x7f50a54d1198&gt;)</div><div class="line">(<span class="string">'instance method called'</span>, &lt;__main__.MyClass object at 0x7f50a54d1198&gt;)</div><div class="line">viking@ubuntu:~/python/methods$</div></pre></td></tr></table></figure>
+<p>可以看出，输出了同样地结果。</p>
+<p>同时，对象实例还可以通过 self.<strong>class</strong> 属性访问类本身，这让对象实例突破了约束，其既可以修改对象的状态，也可以修改类本身的状态。</p>
+<p>试着使用类方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># instance call class method</span></div><div class="line">print(myclass.classmethod())</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">viking@ubuntu:~/python/methods$ python methods.py </div><div class="line">(<span class="string">'instance method called'</span>, &lt;__main__.MyClass object at 0x7fbb4943b198&gt;)</div><div class="line">(<span class="string">'instance method called'</span>, &lt;__main__.MyClass object at 0x7fbb4943b320&gt;)</div><div class="line">(<span class="string">'class method called'</span>, &lt;class <span class="string">'__main__.MyClass'</span>&gt;)</div><div class="line">viking@ubuntu:~/python/methods$</div></pre></td></tr></table></figure>
+<p>可以看出，调用 classmethod() 并没有通过对象实例，而是通过的类对象。</p>
+<p>这里需要注意的是 self 和 cls 可以任意替换，如 the_object 或者 the_class，会是同样地的效果，但是都必须是第一个参数。</p>
+<p>现在来调用下静态方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># install call static method</span></div><div class="line">print(myclass.staticmethod())</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">viking@ubuntu:~/python/methods$ python methods.py </div><div class="line">(<span class="string">'instance method called'</span>, &lt;__main__.MyClass object at 0x7fe608f892e8&gt;)</div><div class="line">(<span class="string">'instance method called'</span>, &lt;__main__.MyClass object at 0x7fe608f89278&gt;)</div><div class="line">(<span class="string">'class method called'</span>, &lt;class <span class="string">'__main__.MyClass'</span>&gt;)</div><div class="line">static method called</div><div class="line">viking@ubuntu:~/python/methods$</div></pre></td></tr></table></figure>
+<p>可以看出，同样通过对象实例可以调用类中定义的静态方法。</p>
+<p>下面来看看，使用类来调用上述的方法，会有什么输出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># class call class method</span></div><div class="line">print(MyClass.classmethod())</div><div class="line"></div><div class="line"><span class="comment"># class call static method</span></div><div class="line">print(MyClass.staticmethod())</div><div class="line"></div><div class="line"><span class="comment"># class call instance method</span></div><div class="line">print(MyClass.method())</div></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">viking@ubuntu:~/python/methods$ </div><div class="line">viking@ubuntu:~/python/methods$ python methods.py </div><div class="line">(<span class="string">'class method called'</span>, &lt;class <span class="string">'__main__.MyClass'</span>&gt;)</div><div class="line">static method called</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"methods.py"</span>, line 42, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    <span class="built_in">print</span>(MyClass.method())</div><div class="line">TypeError: method() missing 1 required positional argument: <span class="string">'self'</span></div><div class="line">viking@ubuntu:~/python/methods$</div></pre></td></tr></table></figure>
+<p>可以看出，可以正常的调用 classmethod() 和 staticmethod()，但是在调用 method() 的时候却出现了 TypeError 错误。</p>
+<p>这正是所期望的，因为如果要使用实例方法的话，必须要创建一个对象实例。</p>
+<p>那到底什么时候用 classmethod ？什么时候用 staticmethod 呢？下篇继续。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/11/python-028-python-enum/" rel="next" title="Python 中的枚举类型">
+                <i class="fa fa-chevron-left"></i> Python 中的枚举类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/12/python-030-python-itertor/" rel="prev" title="Python中的for工作原理">
+                Python中的for工作原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Viking Den</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("uyYEuRKVstiSUSuSLjwTogzr-gzGzoHsz", "E1WrYee4gjwbKuLDKSkzx2rX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

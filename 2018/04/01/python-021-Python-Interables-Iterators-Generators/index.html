@@ -1,0 +1,800 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Viking Den Personal Website" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="原文：Iterables vs. Iterators vs. Generators
+Occasionally I’ve run into situations of confusion on the exact differences between the following related concepts in Python:
+偶尔会对Python中以下相关概念的不同产生疑惑：
+
+a con">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python中的可迭代对象，迭代器，生成器(Iterables vs. Iterators vs. Generators)">
+<meta property="og:url" content="http://vikingden.cn/2018/04/01/python-021-Python-Interables-Iterators-Generators/index.html">
+<meta property="og:site_name" content="Viking's Website">
+<meta property="og:description" content="原文：Iterables vs. Iterators vs. Generators
+Occasionally I’ve run into situations of confusion on the exact differences between the following related concepts in Python:
+偶尔会对Python中以下相关概念的不同产生疑惑：
+
+a con">
+<meta property="og:image" content="http://vikingden.cn/images/categories/python/021/relationships.png">
+<meta property="og:image" content="http://vikingden.cn/images/categories/python/021/iterable-vs-iterator.png">
+<meta property="og:updated_time" content="2019-06-30T14:05:41.339Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python中的可迭代对象，迭代器，生成器(Iterables vs. Iterators vs. Generators)">
+<meta name="twitter:description" content="原文：Iterables vs. Iterators vs. Generators
+Occasionally I’ve run into situations of confusion on the exact differences between the following related concepts in Python:
+偶尔会对Python中以下相关概念的不同产生疑惑：
+
+a con">
+<meta name="twitter:image" content="http://vikingden.cn/images/categories/python/021/relationships.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"remove"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vikingden.cn/2018/04/01/python-021-Python-Interables-Iterators-Generators/"/>
+
+
+
+
+
+  <title> Python中的可迭代对象，迭代器，生成器(Iterables vs. Iterators vs. Generators) | Viking's Website </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Viking's Website</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Notes, thoughts, stories.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://vikingden.cn/2018/04/01/python-021-Python-Interables-Iterators-Generators/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Viking Den">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/16629000?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Viking's Website">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Viking's Website" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python中的可迭代对象，迭代器，生成器(Iterables vs. Iterators vs. Generators)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-01T10:45:08+08:00">
+                2018-04-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/01/python-021-Python-Interables-Iterators-Generators/" class="leancloud_visitors" data-flag-title="Python中的可迭代对象，迭代器，生成器(Iterables vs. Iterators vs. Generators)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文：<a href="http://nvie.com/posts/iterators-vs-generators/" target="_blank" rel="external">Iterables vs. Iterators vs. Generators</a></p>
+<p>Occasionally I’ve run into situations of confusion on the exact differences between the following related concepts in Python:</p>
+<p>偶尔会对Python中以下相关概念的不同产生疑惑：</p>
+<ul>
+<li>a container 容器</li>
+<li>an iterable 可迭代对象</li>
+<li>an iterator 迭代器</li>
+<li>a generator 生成器</li>
+<li>a generator expression 生成器表达式</li>
+<li>a {list, set, dict} comprehension {list, set, dict}的理解</li>
+</ul>
+<p>I’m writing this post as a pocket reference for later.</p>
+<a id="more"></a>
+<p><img src="/images/categories/python/021/relationships.png" alt=""></p>
+<h3 id="Containers-容器"><a href="#Containers-容器" class="headerlink" title="Containers 容器"></a>Containers 容器</h3><p>Containers are data structures holding elements, and that support membership tests. They are data structures that live in memory, and typically hold all their values in memory, too. In Python, some well known examples are:</p>
+<ul>
+<li>list, deque, …</li>
+<li>set, frozensets, …</li>
+<li>dict, defaultdict, OrderedDict, Counter, …</li>
+<li>tuple, namedtuple, …</li>
+<li>str</li>
+</ul>
+<p>Containers are easy to grasp, because you can think of them as real life containers: a box, a cubboard, a house, a ship, etc.</p>
+<p>Technically, an object is a container when it can be asked whether it contains a certain element. You can perform such membership tests on lists, sets, or tuples alike:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">1</span> <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]      <span class="comment"># lists</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">4</span> <span class="keyword">not</span> <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">1</span> <span class="keyword">in</span> &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;      <span class="comment"># sets</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">4</span> <span class="keyword">not</span> <span class="keyword">in</span> &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">1</span> <span class="keyword">in</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)      <span class="comment"># tuples</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">4</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</div></pre></td></tr></table></figure>
+<p>Dict membership will check the keys:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>d = &#123;<span class="number">1</span>: <span class="string">'foo'</span>, <span class="number">2</span>: <span class="string">'bar'</span>, <span class="number">3</span>: <span class="string">'qux'</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">1</span> <span class="keyword">in</span> d</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="number">4</span> <span class="keyword">not</span> <span class="keyword">in</span> d</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="string">'foo'</span> <span class="keyword">not</span> <span class="keyword">in</span> d  <span class="comment"># 'foo' is not a _key_ in the dict</span></div></pre></td></tr></table></figure>
+<p>Finally you can ask a string if it “contains” a substring:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>s = <span class="string">'foobar'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="string">'b'</span> <span class="keyword">in</span> s</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="string">'x'</span> <span class="keyword">not</span> <span class="keyword">in</span> s</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="string">'foo'</span> <span class="keyword">in</span> s  <span class="comment"># a string "contains" all its substrings</span></div></pre></td></tr></table></figure>
+<p>The last example is a bit strange, but it shows how the container interface renders the object opaque. A string does not literally store copies of all of its substrings in memory, but you can certainly use it that way.</p>
+<blockquote>
+<p>NOTE: Even though most containers provide a way to produce every element they contain, that ability does not make them a container but an iterable (we’ll get there in a minute).</p>
+<p>Not all containers are necessarily iterable. An example of this is a Bloom filter. Probabilistic data structures like this can be asked whether they contain a certain element, but they are unable to return their individual elements.</p>
+</blockquote>
+<h3 id="Iterables"><a href="#Iterables" class="headerlink" title="Iterables"></a>Iterables</h3><p>As said, most containers are also iterable. But many more things are iterable as well. Examples are open files, open sockets, etc. Where containers are typically finite, an iterable may just as well represent an infinite source of data.</p>
+<p>An iterable is any object, not necessarily a data structure, that can return an iterator (with the purpose of returning all of its elements). That sounds a bit awkward, but there is an important difference between an iterable and an iterator. Take a look at this example:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; x = [1, 2, 3]</div><div class="line">&gt;&gt;&gt; y = iter(x)</div><div class="line">&gt;&gt;&gt; z = iter(x)</div><div class="line">&gt;&gt;&gt; next(y)</div><div class="line">1</div><div class="line">&gt;&gt;&gt; next(y)</div><div class="line">2</div><div class="line">&gt;&gt;&gt; next(z)</div><div class="line">1</div><div class="line">&gt;&gt;&gt; type(x)</div><div class="line">&lt;class 'list'&gt;</div><div class="line">&gt;&gt;&gt; type(y)</div><div class="line">&lt;class 'list_iterator'&gt;</div></pre></td></tr></table></figure>
+<p>Here, x is the iterable, while y and z are two individual instances of an iterator, producing values from the iterable x. Both y and z hold state, as you can see from the example. In this example, x is a data structure (a list), but that is not a requirement.</p>
+<blockquote>
+<p>NOTE:<br>Often, for pragmatic reasons, iterable classes will implement both <strong><strong>iter</strong>()</strong> and <strong><strong>next</strong>()</strong> in the same class, and have <strong><strong>iter</strong>()</strong> return self, which makes the class both an iterable and its own iterator. It is perfectly fine to return a different object as the iterator, though.</p>
+</blockquote>
+<p>Finally, when you write:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">x = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="keyword">for</span> elem <span class="keyword">in</span> x:</div><div class="line">    ...</div></pre></td></tr></table></figure>
+<p>This is what actually happens:</p>
+<p><img src="/images/categories/python/021/iterable-vs-iterator.png" alt=""></p>
+<p>When you disassemble this Python code, you can see the explicit call to GET_ITER, which is essentially like invoking iter(x). The FOR_ITER is an instruction that will do the equivalent of calling next() repeatedly to get every element, but this does not show from the byte code instructions because it’s optimized for speed in the interpreter.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; import dis</div><div class="line">&gt;&gt;&gt; x = [1, 2, 3]</div><div class="line">&gt;&gt;&gt; dis.dis(<span class="string">'for _ in x: pass'</span>)</div><div class="line">  1           0 SETUP_LOOP              14 (to 17)</div><div class="line">              3 LOAD_NAME                0 (x)</div><div class="line">              6 GET_ITER</div><div class="line">        &gt;&gt;    7 FOR_ITER                 6 (to 16)</div><div class="line">             10 STORE_NAME               1 (_)</div><div class="line">             13 JUMP_ABSOLUTE            7</div><div class="line">        &gt;&gt;   16 POP_BLOCK</div><div class="line">        &gt;&gt;   17 LOAD_CONST               0 (None)</div><div class="line">             20 RETURN_VALUE</div></pre></td></tr></table></figure>
+<h3 id="Iterators"><a href="#Iterators" class="headerlink" title="Iterators"></a>Iterators</h3><p>So what is an iterator then? It’s a stateful helper object that will produce the next value when you call next() on it. Any object that has a <strong><strong>next</strong>()</strong> method is therefore an iterator. How it produces a value is irrelevant.</p>
+<p>So an iterator is a value factory. Each time you ask it for “the next” value, it knows how to compute it because it holds internal state.</p>
+<p>There are countless examples of iterators. All of the itertools functions return iterators. Some produce infinite sequences:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> count</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>counter = count(start=<span class="number">13</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(counter)</div><div class="line"><span class="number">13</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(counter)</div><div class="line"><span class="number">14</span></div></pre></td></tr></table></figure>
+<p>Some produce infinite sequences from finite sequences:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> cycle</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>colors = cycle([<span class="string">'red'</span>, <span class="string">'white'</span>, <span class="string">'blue'</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(colors)</div><div class="line"><span class="string">'red'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(colors)</div><div class="line"><span class="string">'white'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(colors)</div><div class="line"><span class="string">'blue'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(colors)</div><div class="line"><span class="string">'red'</span></div></pre></td></tr></table></figure>
+<p>Some produce finite sequences from infinite sequences:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> itertools <span class="keyword">import</span> islice</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>colors = cycle([<span class="string">'red'</span>, <span class="string">'white'</span>, <span class="string">'blue'</span>])  <span class="comment"># infinite</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>limited = islice(colors, <span class="number">0</span>, <span class="number">4</span>)            <span class="comment"># finite</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> limited:                         <span class="comment"># so safe to use for-loop on</span></div><div class="line"><span class="meta">... </span>    print(x)</div><div class="line">red</div><div class="line">white</div><div class="line">blue</div><div class="line">red</div></pre></td></tr></table></figure>
+<p>To get a better sense of the internals of an iterator, let’s build an iterator producing the Fibonacci numbers:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">fib</span>:</span></div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line"><span class="meta">... </span>        self.prev = <span class="number">0</span></div><div class="line"><span class="meta">... </span>        self.curr = <span class="number">1</span></div><div class="line">...</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> self</div><div class="line">...</div><div class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></div><div class="line"><span class="meta">... </span>        value = self.curr</div><div class="line"><span class="meta">... </span>        self.curr += self.prev</div><div class="line"><span class="meta">... </span>        self.prev = value</div><div class="line"><span class="meta">... </span>        <span class="keyword">return</span> value</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>f = fib()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list(islice(f, <span class="number">0</span>, <span class="number">10</span>))</div><div class="line">[<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">13</span>, <span class="number">21</span>, <span class="number">34</span>, <span class="number">55</span>]</div></pre></td></tr></table></figure>
+<p>Note that this class is both an iterable (because it sports an <strong><strong>iter</strong>()</strong> method), and its own iterator (because it has a <strong><strong>next</strong>()</strong> method).</p>
+<p>The state inside this iterator is fully kept inside the prev and curr instance variables, and are used for subsequent calls to the iterator. Every call to next() does two important things:</p>
+<ul>
+<li><p>Modify its state for the next next() call;</p>
+</li>
+<li><p>Produce the result for the current call.</p>
+</li>
+</ul>
+<blockquote>
+<p>Central idea: a lazy factory</p>
+<p>From the outside, the iterator is like a lazy factory that is idle until you ask it for a value, which is when it starts to buzz and produce a single value, after which it turns idle again.</p>
+</blockquote>
+<h3 id="Generators"><a href="#Generators" class="headerlink" title="Generators"></a>Generators</h3><p>Finally, we’ve arrived at our destination! The generators are my absolute favorite Python language feature. A generator is a special kind of iterator—the elegant kind.</p>
+<p>A generator allows you to write iterators much like the Fibonacci sequence iterator example above, but in an elegant succinct syntax that avoids writing classes with <strong><strong>iter</strong>()</strong> and <strong><strong>next</strong>()</strong> methods.</p>
+<p>Let’s be explicit:</p>
+<ul>
+<li><p>Any generator also is an iterator (not vice versa!);</p>
+</li>
+<li><p>Any generator, therefore, is a factory that lazily produces values.</p>
+</li>
+</ul>
+<p>Here is the same Fibonacci sequence factory, but written as a generator:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">()</span>:</span></div><div class="line"><span class="meta">... </span>    prev, curr = <span class="number">0</span>, <span class="number">1</span></div><div class="line"><span class="meta">... </span>    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line"><span class="meta">... </span>        <span class="keyword">yield</span> curr</div><div class="line"><span class="meta">... </span>        prev, curr = curr, prev + curr</div><div class="line">...</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>f = fib()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list(islice(f, <span class="number">0</span>, <span class="number">10</span>))</div><div class="line">[<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">13</span>, <span class="number">21</span>, <span class="number">34</span>, <span class="number">55</span>]</div></pre></td></tr></table></figure>
+<p>Wow, isn’t that elegant? Notice the magic keyword that’s responsible for the beauty:</p>
+<p><strong>yield</strong></p>
+<p>Let’s break down what happened here: first of all, take note that fib is defined as a normal Python function, nothing special. Notice, however, that there’s no return keyword inside the function body. The return value of the function will be a generator (read: an iterator, a factory, a stateful helper object).</p>
+<p>Now when f = fib() is called, the generator (the factory) is instantiated and returned. No code will be executed at this point: the generator starts in an idle state initially. To be explicit: the line prev, curr = 0, 1 is not executed yet.</p>
+<p>Then, this generator instance is wrapped in an islice(). This is itself also an iterator, so idle initially. Nothing happens, still.</p>
+<p>Then, this iterator is wrapped in a list(), which will consume all of its arguments and build a list from it. To do so, it will start calling next() on the islice() instance, which in turn will start calling next() on our f instance.</p>
+<p>But one step at a time. On the first invocation, the code will finally run a bit: prev, curr = 0, 1 gets executed, the while True loop is entered, and then it encounters the yield curr statement. It will produce the value that’s currently in the curr variable and become idle again.</p>
+<p>This value is passed to the islice() wrapper, which will produce it (because it’s not past the 10th value yet), and list can add the value 1 to the list now.</p>
+<p>Then, it asks islice() for the next value, which will ask f for the next value, which will “unpause” f from its previous state, resuming with the statement prev, curr = curr, prev + curr. Then it re-enters the next iteration of the while loop, and hits the yield curr statement, returning the next value of curr.</p>
+<p>This happens until the output list is 10 elements long and when list() asks islice() for the 11th value, islice() will raise a StopIteration exception, indicating that the end has been reached, and list will return the result: a list of 10 items, containing the first 10 Fibonacci numbers. Notice that the generator doesn’t receive the 11th next() call. In fact, it will not be used again, and will be garbage collected later.</p>
+<h4 id="Types-of-Generators"><a href="#Types-of-Generators" class="headerlink" title="Types of Generators"></a>Types of Generators</h4><p>There are two types of generators in Python: <strong>generator functions</strong> and <strong>generator expressions</strong>. A generator function is any function in which the keyword yield appears in its body. We just saw an example of that. The appearance of the keyword yield is enough to make the function a generator function.</p>
+<p>The other type of generators are the generator equivalent of a list comprehension. Its syntax is really elegant for a limited use case.</p>
+<p>Suppose you use this syntax to build a list of sqaures:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>[x * x <span class="keyword">for</span> x <span class="keyword">in</span> numbers]</div><div class="line">[<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>]</div></pre></td></tr></table></figure>
+<p>You could do the same thing with a set comprehension:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;x * x <span class="keyword">for</span> x <span class="keyword">in</span> numbers&#125;</div><div class="line">&#123;<span class="number">1</span>, <span class="number">4</span>, <span class="number">36</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>&#125;</div></pre></td></tr></table></figure>
+<p>Or a dict comprehension:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;x: x * x <span class="keyword">for</span> x <span class="keyword">in</span> numbers&#125;</div><div class="line">&#123;<span class="number">1</span>: <span class="number">1</span>, <span class="number">2</span>: <span class="number">4</span>, <span class="number">3</span>: <span class="number">9</span>, <span class="number">4</span>: <span class="number">16</span>, <span class="number">5</span>: <span class="number">25</span>, <span class="number">6</span>: <span class="number">36</span>&#125;</div></pre></td></tr></table></figure>
+<p>But you can also use a generator expression (note: this is not a tuple comprehension):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>lazy_squares = (x * x <span class="keyword">for</span> x <span class="keyword">in</span> numbers)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>lazy_squares</div><div class="line">&lt;generator object &lt;genexpr&gt; at <span class="number">0x10d1f5510</span>&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>next(lazy_squares)</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>list(lazy_squares)</div><div class="line">[<span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>]</div></pre></td></tr></table></figure>
+<p>Note that, because we read the first value from lazy_sqaures with next(), it’s state is now at the “second” item, so when we consume it entirely by calling list(), that will only return the partial list of sqaures. (This is just to show the lazy behaviour.) This is as much a generator (and thus, an iterator) as the other examples above.</p>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p>Generators are an incredible powerful programming construct. They allow you to write streaming code with fewer intermediate variables and data structures. Besides that, they are more memory and CPU efficient. Finally, they tend to require fewer lines of code, too.</p>
+<p>Tip to get started with generators: find places in your code where you do the following:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">something</span><span class="params">()</span>:</span></div><div class="line">    result = []</div><div class="line">    <span class="keyword">for</span> ... <span class="keyword">in</span> ...:</div><div class="line">        result.append(x)</div><div class="line">    <span class="keyword">return</span> result</div></pre></td></tr></table></figure>
+<p>And replace it by:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">iter_something</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">for</span> ... <span class="keyword">in</span> ...:</div><div class="line">        <span class="keyword">yield</span> x</div><div class="line"></div><div class="line"><span class="comment"># def something():  # Only if you really need a list structure</span></div><div class="line"><span class="comment">#     return list(iter_something())</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/01/python-020-python-confuse-in-integer-comparsion/" rel="next" title="Python解惑-整数比较">
+                <i class="fa fa-chevron-left"></i> Python解惑-整数比较
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/04/python-022-python-join/" rel="prev" title="Python join函数">
+                Python join函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Viking Den</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("uyYEuRKVstiSUSuSLjwTogzr-gzGzoHsz", "E1WrYee4gjwbKuLDKSkzx2rX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

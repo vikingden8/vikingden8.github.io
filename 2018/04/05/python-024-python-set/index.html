@@ -1,0 +1,729 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Viking Den Personal Website" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="集合中包含一系列的元素，在Python中这些元素不需要是相同的类型，且这些元素在集合中是没有存储顺序的。
+集合的赋值集合的表示方法是花括号，这与字典是一样的，可以通过括号或构造函数来初始化一个集合，如果传入的参数有重复，会自动忽略：
+1234&amp;gt;&amp;gt;&amp;gt; &amp;#123;1,2,&quot;hi&quot;,2.23&amp;#125;&amp;#123;2.23, 2, &apos;hi&apos;, 1&amp;#125;&amp;gt;&amp;gt;&amp;gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python中set">
+<meta property="og:url" content="http://vikingden.cn/2018/04/05/python-024-python-set/index.html">
+<meta property="og:site_name" content="Viking's Website">
+<meta property="og:description" content="集合中包含一系列的元素，在Python中这些元素不需要是相同的类型，且这些元素在集合中是没有存储顺序的。
+集合的赋值集合的表示方法是花括号，这与字典是一样的，可以通过括号或构造函数来初始化一个集合，如果传入的参数有重复，会自动忽略：
+1234&amp;gt;&amp;gt;&amp;gt; &amp;#123;1,2,&quot;hi&quot;,2.23&amp;#125;&amp;#123;2.23, 2, &apos;hi&apos;, 1&amp;#125;&amp;gt;&amp;gt;&amp;gt;">
+<meta property="og:updated_time" content="2019-06-30T14:05:41.341Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python中set">
+<meta name="twitter:description" content="集合中包含一系列的元素，在Python中这些元素不需要是相同的类型，且这些元素在集合中是没有存储顺序的。
+集合的赋值集合的表示方法是花括号，这与字典是一样的，可以通过括号或构造函数来初始化一个集合，如果传入的参数有重复，会自动忽略：
+1234&amp;gt;&amp;gt;&amp;gt; &amp;#123;1,2,&quot;hi&quot;,2.23&amp;#125;&amp;#123;2.23, 2, &apos;hi&apos;, 1&amp;#125;&amp;gt;&amp;gt;&amp;gt;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"remove"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vikingden.cn/2018/04/05/python-024-python-set/"/>
+
+
+
+
+
+  <title> Python中set | Viking's Website </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Viking's Website</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Notes, thoughts, stories.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://vikingden.cn/2018/04/05/python-024-python-set/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Viking Den">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/16629000?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Viking's Website">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Viking's Website" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Python中set
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-05T10:24:08+08:00">
+                2018-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Python学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/04/05/python-024-python-set/" class="leancloud_visitors" data-flag-title="Python中set">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>集合中包含一系列的元素，在Python中这些元素不需要是相同的类型，且这些元素在集合中是没有存储顺序的。</p>
+<h3 id="集合的赋值"><a href="#集合的赋值" class="headerlink" title="集合的赋值"></a>集合的赋值</h3><p>集合的表示方法是花括号，这与字典是一样的，可以通过括号或构造函数来初始化一个集合，如果传入的参数有重复，会自动忽略：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="string">"hi"</span>,<span class="number">2.23</span>&#125;</div><div class="line">&#123;<span class="number">2.23</span>, <span class="number">2</span>, <span class="string">'hi'</span>, <span class="number">1</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>set(<span class="string">"hello"</span>)</div><div class="line">&#123;<span class="string">'l'</span>, <span class="string">'h'</span>, <span class="string">'e'</span>, <span class="string">'o'</span>&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：由于集合和字典都用{}表示，所以初始化空的集合只能通过set()操作，{}只是表示一个空的字典</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="集合的增加"><a href="#集合的增加" class="headerlink" title="集合的增加"></a>集合的增加</h3><p>集合元素的增加支持两种类型，单个元素的增加用add方法，对序列的增加用update方法。add的作用类似列表中的append，而update类似extend方法。update方法可以支持同时传入多个参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a=&#123;<span class="number">1</span>,<span class="number">2</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.update([<span class="number">3</span>,<span class="number">4</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">7</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">7</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.update(<span class="string">"hello"</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="string">'h'</span>, <span class="string">'e'</span>, <span class="string">'l'</span>, <span class="string">'o'</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.add(<span class="string">"hello"</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="string">'hello'</span>, <span class="number">7</span>, <span class="string">'h'</span>, <span class="string">'e'</span>, <span class="string">'l'</span>, <span class="string">'o'</span>&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注：增加已有的元素不会对集合产生影响，也不会抛出异常</p>
+</blockquote>
+<h3 id="集合的删除"><a href="#集合的删除" class="headerlink" title="集合的删除"></a>集合的删除</h3><p>集合删除单个元素有两种方法，两者的区别是在元素不在原集合中时是否会抛出异常，set.discard(x)不会，set.remove(x)会抛出KeyError错误：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.discard(<span class="number">1</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.discard(<span class="number">1</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.remove(<span class="number">1</span>)</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;input&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">KeyError: <span class="number">1</span></div></pre></td></tr></table></figure>
+<p>集合也支持pop()方法，不过由于集合是无序的，pop返回的结果不能确定，且当集合为空时调用pop会抛出KeyError错误，可以调用clear方法来清空集合：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a=&#123;<span class="number">3</span>,<span class="string">"a"</span>,<span class="number">2.1</span>,<span class="number">1</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.pop()</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.pop()</div><div class="line"><span class="number">3</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.clear()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">set()</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.pop()</div><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"&lt;input&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">KeyError: <span class="string">'pop from an empty set'</span></div></pre></td></tr></table></figure>
+<h3 id="集合操作"><a href="#集合操作" class="headerlink" title="集合操作"></a>集合操作</h3><ul>
+<li><p>并集：set.union(s),也可以用a|b计算</p>
+</li>
+<li><p>交集：set.intersection(s)，也可以用a&amp;b计算</p>
+</li>
+<li><p>差集：set.difference(s)，也可以用a-b计算</p>
+</li>
+</ul>
+<p>需要注意的是Python提供了一个求对称差集的方法set.symmetric_difference(s)，相当于两个集合互求差集后再求并集，其实就是返回两个集合中只出现一次的元素，也可以用a^b计算。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b=&#123;<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.symmetric_difference(b)</div><div class="line">&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</div></pre></td></tr></table></figure>
+<p>set.update(s)操作相当于将两个集合求并集并赋值给原集合，其他几种集合操作也提供各自的update版本来改变原集合的值，形式如intersection_update(),也可以支持多参数形式。</p>
+<h3 id="包含关系"><a href="#包含关系" class="headerlink" title="包含关系"></a>包含关系</h3><p>两个集合之间一般有三种关系，相交、包含、不相交。在Python中分别用下面的方法判断：</p>
+<ul>
+<li><p>set.isdisjoint(s)：判断两个集合是不是不相交</p>
+</li>
+<li><p>set.issuperset(s)：判断集合是不是包含其他集合，等同于a&gt;=b</p>
+</li>
+<li><p>set.issubset(s)：判断集合是不是被其他集合包含，等同于a&lt;=b</p>
+</li>
+</ul>
+<p>如果要真包含关系，就用符号操作&gt;和&lt;。</p>
+<h3 id="不变集合"><a href="#不变集合" class="headerlink" title="不变集合"></a>不变集合</h3><p>Python提供了不能改变元素的集合的实现版本，即不能增加或删除元素，类型名叫frozenset，使用方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = frozenset(<span class="string">"hello"</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">frozenset(&#123;<span class="string">'l'</span>, <span class="string">'h'</span>, <span class="string">'e'</span>, <span class="string">'o'</span>&#125;)</div></pre></td></tr></table></figure>
+<p>需要注意的是frozenset仍然可以进行集合操作，只是不能修改。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; a = frozenset('hello')</div><div class="line">&gt;&gt;&gt; a</div><div class="line">frozenset(&#123;'o', 'l', 'h', 'e'&#125;)</div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; type(a)</div><div class="line">&lt;class 'frozenset'&gt;</div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; a.add('a')</div><div class="line">Traceback (most recent call last):</div><div class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</div><div class="line">AttributeError: 'frozenset' object has no attribute 'add'</div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; a.update('adc')</div><div class="line">Traceback (most recent call last):</div><div class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</div><div class="line">AttributeError: 'frozenset' object has no attribute 'update'</div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; </div><div class="line">&gt;&gt;&gt; a.remove('h')</div><div class="line">Traceback (most recent call last):</div><div class="line">  File "&lt;stdin&gt;", line 1, in &lt;module&gt;</div><div class="line">AttributeError: 'frozenset' object has no attribute 'remove'</div><div class="line">&gt;&gt;&gt;</div></pre></td></tr></table></figure>
+<p>可以看出，当调用add(), update(), remove()方法时都会出现AttributeError错误。</p>
+<p>如果要一个有frozenset中的所有元素的普通集合，只需把它当作参数传入集合的构造函数中即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = frozenset(<span class="string">"hello"</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = set(a)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a.add(<span class="number">12</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div><div class="line">&#123;<span class="string">'l'</span>, <span class="number">12</span>, <span class="string">'h'</span>, <span class="string">'e'</span>, <span class="string">'o'</span>&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/05/python-023-what-are-the-differences-between-tuples-and-lists-in-python/" rel="next" title="What are the differences between tuples and lists in Python?">
+                <i class="fa fa-chevron-left"></i> What are the differences between tuples and lists in Python?
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/07/python-025-python-percentage-sign/" rel="prev" title="Python中字符串格式化之%">
+                Python中字符串格式化之% <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Viking Den</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("uyYEuRKVstiSUSuSLjwTogzr-gzGzoHsz", "E1WrYee4gjwbKuLDKSkzx2rX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>

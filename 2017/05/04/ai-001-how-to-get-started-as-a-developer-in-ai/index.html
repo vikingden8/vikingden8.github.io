@@ -1,0 +1,722 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|Roboto:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Viking Den Personal Website" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="至少从 20 世纪 50 年代开始，人工智能的理念就一直吸引着我们，鼓舞着计算机科学家创造越来越复杂的新技术，同时让日常消费者对未来充满期待。 如果我们能够在不冒任何生命风险的情况下探索海洋深处，将会怎样？ 如果我们能够乘坐无人驾驶汽车在智能道路上行驶，又会怎样呢？ 尽管我们对人工智能及其潜能的理解在过去几十年中发生了变化，但我们有理由相信，人工智能的时代可能已经来临。 那么，作为开发人员，您应该">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人工智能领域简介">
+<meta property="og:url" content="http://vikingden.cn/2017/05/04/ai-001-how-to-get-started-as-a-developer-in-ai/index.html">
+<meta property="og:site_name" content="Viking's Website">
+<meta property="og:description" content="至少从 20 世纪 50 年代开始，人工智能的理念就一直吸引着我们，鼓舞着计算机科学家创造越来越复杂的新技术，同时让日常消费者对未来充满期待。 如果我们能够在不冒任何生命风险的情况下探索海洋深处，将会怎样？ 如果我们能够乘坐无人驾驶汽车在智能道路上行驶，又会怎样呢？ 尽管我们对人工智能及其潜能的理解在过去几十年中发生了变化，但我们有理由相信，人工智能的时代可能已经来临。 那么，作为开发人员，您应该">
+<meta property="og:image" content="http://vikingden.cn/images/categories/ai/001/AI-Circle.jpg">
+<meta property="og:image" content="http://vikingden.cn/images/categories/ai/001/aiUseCases_0.jpg">
+<meta property="og:image" content="http://vikingden.cn/images/categories/ai/001/deepLearning.jpg">
+<meta property="og:updated_time" content="2019-06-30T14:05:41.322Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人工智能领域简介">
+<meta name="twitter:description" content="至少从 20 世纪 50 年代开始，人工智能的理念就一直吸引着我们，鼓舞着计算机科学家创造越来越复杂的新技术，同时让日常消费者对未来充满期待。 如果我们能够在不冒任何生命风险的情况下探索海洋深处，将会怎样？ 如果我们能够乘坐无人驾驶汽车在智能道路上行驶，又会怎样呢？ 尽管我们对人工智能及其潜能的理解在过去几十年中发生了变化，但我们有理由相信，人工智能的时代可能已经来临。 那么，作为开发人员，您应该">
+<meta name="twitter:image" content="http://vikingden.cn/images/categories/ai/001/AI-Circle.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"remove"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vikingden.cn/2017/05/04/ai-001-how-to-get-started-as-a-developer-in-ai/"/>
+
+
+
+
+
+  <title> 人工智能领域简介 | Viking's Website </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Viking's Website</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Notes, thoughts, stories.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://vikingden.cn/2017/05/04/ai-001-how-to-get-started-as-a-developer-in-ai/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Viking Den">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/16629000?v=3&s=460">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Viking's Website">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Viking's Website" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                人工智能领域简介
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-04T09:09:35+08:00">
+                2017-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/05/04/ai-001-how-to-get-started-as-a-developer-in-ai/" class="leancloud_visitors" data-flag-title="人工智能领域简介">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">Visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>至少从 20 世纪 50 年代开始，人工智能的理念就一直吸引着我们，鼓舞着计算机科学家创造越来越复杂的新技术，同时让日常消费者对未来充满期待。 如果我们能够在不冒任何生命风险的情况下探索海洋深处，将会怎样？ 如果我们能够乘坐无人驾驶汽车在智能道路上行驶，又会怎样呢？ 尽管我们对人工智能及其潜能的理解在过去几十年中发生了变化，但我们有理由相信，人工智能的时代可能已经来临。 那么，作为开发人员，您应该如何起步呢？ 本文将讨论人工智能的一些基本知识，并概述一些可能有帮助的工具和资源。</p>
+<h3 id="首先，什么是人工智能？"><a href="#首先，什么是人工智能？" class="headerlink" title="首先，什么是人工智能？"></a>首先，什么是人工智能？</h3><p>虽然有很多不同的方式来思考人工智能，并有很多不同的技术来处理，但机器智能的关键在于，它必须能够 <strong>感知</strong>、<strong>推断</strong> 和 <strong>行动</strong>，然后根据经验进行 <strong>调整</strong>。</p>
+<ul>
+<li><p><strong>感知</strong>—从大量数据中确定和识别有意义的对象或概念。 这是红绿灯吗？ 它是肿瘤还是正常组织？</p>
+</li>
+<li><p><strong>推断</strong>—了解更大的背景环境，并制定一个实现目标的计划。 如果目标是避免撞车，汽车必须根据车辆行为、接近度、速度和路况计算撞车的可能性。</p>
+</li>
+<li><p><strong>行动</strong>—推荐或直接启动最佳行动方案。 根据车辆和交通分析，汽车可以刹车、加速或准备安全机制。</p>
+</li>
+<li><p><strong>调整</strong>—最后，我们必须能够根据经验在每个阶段调整算法，对它们进行重新训练，使他们变得更智能。 自主车辆算法应该进行重新训练，以识别更多盲点，将新变量纳入环境，并根据以前的事件调整行动。</p>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="如今的人工智能是什么样子？"><a href="#如今的人工智能是什么样子？" class="headerlink" title="如今的人工智能是什么样子？"></a>如今的人工智能是什么样子？</h3><p>如今的人工智能是一个涵盖性术语，代表任何可以感知、推断、行动和调整的程序。 开发人员通过两种方式让机器执行人工智能：机器学习和深度学习。</p>
+<p><img src="/images/categories/ai/001/AI-Circle.jpg" alt=""></p>
+<ul>
+<li><p>在机器学习中，学习算法从数据构建模型，并随着数据量的增加不断改进。 机器学习有四种主要类型：<strong>监督式学习</strong> 、<strong>非监督式学习</strong> 、<strong>半监督式学习</strong> 和 <strong>强化学习</strong>。 在监督式机器学习中，算法通过处理和分类大量的标记数据来学习识别数据。 在非监督式机器学习中，算法能够以超过人类大脑的速度，快速识别大量未标记数据中的模式和类别。 您可以在<a href="https://software.intel.com/zh-cn/articles/why-should-you-care-about-machine-learning" target="_blank" rel="external">本文</a>中了解有关机器学习的更多信息。</p>
+</li>
+<li><p>深度学习是机器学习的一个子集，多层神经网络从大量数据中进行学习。</p>
+</li>
+</ul>
+<h3 id="人工智能的实际应用：-机器学习工作流"><a href="#人工智能的实际应用：-机器学习工作流" class="headerlink" title="人工智能的实际应用： 机器学习工作流"></a>人工智能的实际应用： 机器学习工作流</h3><p>正如我们之前讨论的，人工智能能够感知、推断和行动，然后根据经验进行调整。 但它到底是什么样子呢？ 这是机器学习的一般工作流：</p>
+<ul>
+<li><p><strong>数据采集</strong>—首先，您需要大量数据。 这些数据可以从任何数量的来源进行收集，包括可穿戴设备的传感器以及其他对象、云和 web。</p>
+</li>
+<li><p><strong>数据聚合和管理</strong>—收集数据后，数据科学家将对数据进行聚合和标记（如果是监督式机器学习）。</p>
+</li>
+<li><p><strong>模型开发</strong>—接下来，数据用于开发模型，然后对其进行精确度训练并针对性能进行优化。</p>
+</li>
+<li><p><strong>模型部署和评分</strong>—模型部署在应用中，用于根据新数据进行预测。</p>
+</li>
+<li><p><strong>使用新数据更新</strong>—随着数据量的增加，模型将变得更加精细和准确。 例如，在自动驾驶汽车的行驶过程中，应用将通过传感器、GPS、360 度视频捕捉等功能提供实时信息，然后使用这些信息来优化未来的预测。</p>
+</li>
+</ul>
+<h3 id="面向人工智能开发人员的机遇"><a href="#面向人工智能开发人员的机遇" class="headerlink" title="面向人工智能开发人员的机遇"></a>面向人工智能开发人员的机遇</h3><p>人工智能最令人兴奋的一点在于，它具有无限的潜力，不仅能够变革计算行业或软件行业，而且能够改变与我们的生活息息相关的每个行业。 工业革命、技术革命和数字革命改变了我们生活的方方面面，人工智能将以同样的方式改变整个社会。 英特尔为人工智能提供强大的基础、框架和策略。 涉及深度学习和机器学习技术时，英特尔可帮助开发人员更加经济高效地交付更高质量的项目。</p>
+<p>对于开发人员而言，人工智能领域的扩展意味着您可以将自己在人工智能领域的兴趣和知识运用到其他感兴趣的行业中，如音乐、体育或医疗。 当您在探索人工智能的世界时，思考一下自己感兴趣的其他领域，以及如何以有意义的方式为该领域做出贡献。 创意是永无止境的，我们在下面提供了一些例子帮助您思考。</p>
+<p><img src="/images/categories/ai/001/aiUseCases_0.jpg" alt=""></p>
+<p><img src="/images/categories/ai/001/deepLearning.jpg" alt=""></p>
+<p>转载自:<a href="https://software.intel.com/zh-cn/articles/how-to-get-started-as-a-developer-in-ai" target="_blank" rel="external">人工智能领域的开发人员如何起步</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/15/python-012-setting-python-2-6-as-default-on-linux/" rel="next" title="Setting python 2.6 as default on Linux">
+                <i class="fa fa-chevron-left"></i> Setting python 2.6 as default on Linux
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/04/ai-002-why-should-you-care-about-machine-learning/" rel="prev" title="你为什么要关注机器学习？">
+                你为什么要关注机器学习？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Viking Den</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("uyYEuRKVstiSUSuSLjwTogzr-gzGzoHsz", "E1WrYee4gjwbKuLDKSkzx2rX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>
