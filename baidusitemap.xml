@@ -4,6 +4,24 @@
 
     
   <url>
+    <loc>http://vikingden.cn/2019/07/14/css-css-quotes-property/</loc>
+    <lastmod>2019-07-14T14:01:13.359Z</lastmod>
+    <data>
+        <display>
+        <title>CSS中的quotes属性</title>
+        <pubTime>2019-07-14T02:31:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="CSS学习笔记" url="http://vikingden.cn/categories/CSS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://vikingden.cn/2019/06/30/javascript-var-let-const/</loc>
     <lastmod>2019-06-30T14:56:49.483Z</lastmod>
     <data>
@@ -114,12 +132,12 @@
 
     
   <url>
-    <loc>http://vikingden.cn/2018/07/07/python-029-python-instance-class-static-methods/</loc>
+    <loc>http://vikingden.cn/2018/07/12/python-030-python-itertor/</loc>
     <lastmod>2019-06-30T14:05:41.346Z</lastmod>
     <data>
         <display>
-        <title>Python's Instance, Class and Static Methods</title>
-        <pubTime>2018-07-07T03:01:08.000Z</pubTime>
+        <title>Python中的for工作原理</title>
+        <pubTime>2018-07-12T11:12:08.000Z</pubTime>
         
          
            
@@ -132,12 +150,12 @@
 
     
   <url>
-    <loc>http://vikingden.cn/2018/07/12/python-030-python-itertor/</loc>
+    <loc>http://vikingden.cn/2018/07/07/python-029-python-instance-class-static-methods/</loc>
     <lastmod>2019-06-30T14:05:41.346Z</lastmod>
     <data>
         <display>
-        <title>Python中的for工作原理</title>
-        <pubTime>2018-07-12T11:12:08.000Z</pubTime>
+        <title>Python's Instance, Class and Static Methods</title>
+        <pubTime>2018-07-07T03:01:08.000Z</pubTime>
         
          
            
@@ -204,24 +222,6 @@
 
     
   <url>
-    <loc>http://vikingden.cn/2018/04/05/python-024-python-set/</loc>
-    <lastmod>2019-06-30T14:05:41.341Z</lastmod>
-    <data>
-        <display>
-        <title>Python中set</title>
-        <pubTime>2018-04-05T02:24:08.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://vikingden.cn/2018/04/07/python-025-python-percentage-sign/</loc>
     <lastmod>2019-06-30T14:05:41.341Z</lastmod>
     <data>
@@ -240,12 +240,12 @@
 
     
   <url>
-    <loc>http://vikingden.cn/2018/04/04/python-022-python-join/</loc>
-    <lastmod>2019-06-30T14:05:41.340Z</lastmod>
+    <loc>http://vikingden.cn/2018/04/05/python-024-python-set/</loc>
+    <lastmod>2019-06-30T14:05:41.341Z</lastmod>
     <data>
         <display>
-        <title>Python join函数</title>
-        <pubTime>2018-04-04T15:45:08.000Z</pubTime>
+        <title>Python中set</title>
+        <pubTime>2018-04-05T02:24:08.000Z</pubTime>
         
          
            
@@ -264,6 +264,24 @@
         <display>
         <title>What are the differences between tuples and lists in Python?</title>
         <pubTime>2018-04-05T00:45:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Python学习笔记" url="http://vikingden.cn/categories/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://vikingden.cn/2018/04/04/python-022-python-join/</loc>
+    <lastmod>2019-06-30T14:05:41.340Z</lastmod>
+    <data>
+        <display>
+        <title>Python join函数</title>
+        <pubTime>2018-04-04T15:45:08.000Z</pubTime>
         
          
            
@@ -312,12 +330,12 @@
 
     
   <url>
-    <loc>http://vikingden.cn/2018/03/31/python-019-python-tail-recurision/</loc>
+    <loc>http://vikingden.cn/2018/03/29/python-018-python-thread/</loc>
     <lastmod>2019-06-30T14:05:41.338Z</lastmod>
     <data>
         <display>
-        <title>Python中的尾递归</title>
-        <pubTime>2018-03-31T11:25:08.000Z</pubTime>
+        <title>Python中的线程</title>
+        <pubTime>2018-03-29T11:25:08.000Z</pubTime>
         
          
            
@@ -330,12 +348,12 @@
 
     
   <url>
-    <loc>http://vikingden.cn/2018/03/29/python-018-python-thread/</loc>
+    <loc>http://vikingden.cn/2018/03/31/python-019-python-tail-recurision/</loc>
     <lastmod>2019-06-30T14:05:41.338Z</lastmod>
     <data>
         <display>
-        <title>Python中的线程</title>
-        <pubTime>2018-03-29T11:25:08.000Z</pubTime>
+        <title>Python中的尾递归</title>
+        <pubTime>2018-03-31T11:25:08.000Z</pubTime>
         
          
            
@@ -474,12 +492,12 @@
 
     
   <url>
-    <loc>http://vikingden.cn/2017/04/13/python-010-python-object/</loc>
+    <loc>http://vikingden.cn/2017/04/13/python-009-python-reference-count/</loc>
     <lastmod>2019-06-30T14:05:41.331Z</lastmod>
     <data>
         <display>
-        <title>Python对象</title>
-        <pubTime>2017-04-13T14:55:33.000Z</pubTime>
+        <title>Python引用计数</title>
+        <pubTime>2017-04-13T13:45:16.000Z</pubTime>
         
          
            
@@ -492,12 +510,12 @@
 
     
   <url>
-    <loc>http://vikingden.cn/2017/04/13/python-009-python-reference-count/</loc>
+    <loc>http://vikingden.cn/2017/04/13/python-010-python-object/</loc>
     <lastmod>2019-06-30T14:05:41.331Z</lastmod>
     <data>
         <display>
-        <title>Python引用计数</title>
-        <pubTime>2017-04-13T13:45:16.000Z</pubTime>
+        <title>Python对象</title>
+        <pubTime>2017-04-13T14:55:33.000Z</pubTime>
         
          
            
